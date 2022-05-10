@@ -19,8 +19,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux:2.4.5")
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
-    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-r2dbc
-    implementation("org.springframework.data:spring-data-r2dbc:1.4.0")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-r2dbc
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:2.5.2")
+    // https://mvnrepository.com/artifact/io.r2dbc/r2dbc-postgresql
+    runtimeOnly("io.r2dbc:r2dbc-postgresql:0.8.10.RELEASE")
+
 
 
 }
