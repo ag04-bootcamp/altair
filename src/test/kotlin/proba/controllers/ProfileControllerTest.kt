@@ -10,7 +10,7 @@ import proba.model.Profile
 import java.time.LocalDateTime
 
 @SpringBootTest
-class ProfileControllerTest {
+open class ProfileControllerTest {
 
     lateinit var client: WebTestClient
     lateinit var profile: Profile
@@ -34,4 +34,6 @@ class ProfileControllerTest {
             .exchange()
             .expectStatus().isOk
     }
+
+
 }
