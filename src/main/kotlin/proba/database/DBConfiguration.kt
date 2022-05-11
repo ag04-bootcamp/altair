@@ -9,16 +9,16 @@ open class DBConfiguration(db: DatabaseClient) {
         val initDb = db.sql {
             """ CREATE TABLE IF NOT EXISTS profile (
                     id SERIAL PRIMARY KEY,
-                    firstName VARCHAR(20) NOT NULL,
-                    lastName VARCHAR(20) NOT NULL,
-                    birthDate TIMESTAMP NOT NULL
+                    first_name VARCHAR(20) NOT NULL,
+                    last_name VARCHAR(20) NOT NULL,
+                    birth_date TIMESTAMP NOT NULL
                 );
                 CREATE TABLE IF NOT EXISTS health_record(
                     id SERIAL PRIMARY KEY,
                     profile_id INTEGER NOT NULL,
                     temperature DECIMAL NOT NULL,
-                    bloodPressure DECIMAL NOT NULL,
-                    heartRate DECIMAL NOT NULL,
+                    blood_pressure DECIMAL NOT NULL,
+                    heart_rate DECIMAL NOT NULL,
                     date TIMESTAMP NOT NULL
                 );
             """

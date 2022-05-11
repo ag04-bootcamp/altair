@@ -4,3 +4,9 @@ spring:
     url: r2dbc:postgresql://localhost/health_proba
     username: postgres
     password: postgres
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
