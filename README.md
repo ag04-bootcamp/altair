@@ -1,6 +1,6 @@
 # altair
 
-kotlin aplikacija s react frontom. za igranje dok cekamo projekt :) 
+kotlin aplikacija s react frontom i flux rest APIjem. za igranje dok cekamo projekt :) 
 u pravilu pusta korisnika da unese neke "health record" stavke te prikazuje prosjecno stanje istih.
 kud cemo odleprsati, to cemo tek vidjeti :D
 
