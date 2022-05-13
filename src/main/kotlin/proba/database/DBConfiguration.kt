@@ -9,9 +9,7 @@ open class DBConfiguration(db: DatabaseClient) {
         val initDb = db.sql {
             """ CREATE TABLE IF NOT EXISTS profile (
                     id SERIAL PRIMARY KEY,
-                    first_name VARCHAR(20) NOT NULL,
-                    last_name VARCHAR(20) NOT NULL,
-                    birth_date TIMESTAMP NOT NULL,
+                    user_id INTEGER NOT NULL,
                     weight DECIMAL NOT NULL,
                     height DECIMAL NOT NULL,
                     personal_observation VARCHAR(200)
@@ -26,6 +24,15 @@ open class DBConfiguration(db: DatabaseClient) {
                     measurement_name VARCHAR(20) NOT NULL,
                     value DECIMAL NOT NULL,
                     date TIMESTAMP NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS user(
+                    id SERIAL PRIMARY KEY,
+                    first_name VARCHAR(20) NOT NULL,
+                    last_name VARCHAR(20) NOT NULL,
+                    birth_date TIMESTAMP NOT NULL,
+                    email VARCHAR(40) NOT NULL,
+                    user_name VARCHAR(20) NOT NULL,
+                    password VARCHAR(20) NOT NULL
                 );
             """
         }
