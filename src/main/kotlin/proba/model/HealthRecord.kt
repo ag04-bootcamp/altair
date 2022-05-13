@@ -6,5 +6,5 @@ import java.time.LocalDate
 
 @Table
 data class HealthRecord(@Id val id: Long?, var profileId: Long?,
-                        var measurementId: Long, var value: Double,
+                        var measurementName: String, var value: Double,
                         var date: LocalDate)

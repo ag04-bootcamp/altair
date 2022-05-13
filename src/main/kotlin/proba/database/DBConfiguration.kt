@@ -23,7 +23,7 @@ open class DBConfiguration(db: DatabaseClient) {
                 CREATE TABLE IF NOT EXISTS health_record(
                     id SERIAL PRIMARY KEY,
                     profile_id INTEGER NOT NULL,
-                    measurement_id INTEGER NOT NULL,
+                    measurement_name VARCHAR(20) NOT NULL,
                     value DECIMAL NOT NULL,
                     date TIMESTAMP NOT NULL
                 );

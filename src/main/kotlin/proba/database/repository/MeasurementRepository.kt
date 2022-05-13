@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono
 @Repository
 interface MeasurementRepository: ReactiveCrudRepository<Measurement, Long> {
 
-    @Query("select m.* from measurement where m.name = :name")
+    @Query("select m.* from measurement m where m.name = :name")
     fun findByName(name: String): Mono<Measurement>
 }

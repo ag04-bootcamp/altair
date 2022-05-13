@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import proba.database.repository.HealthRecordRepository
-import proba.database.repository.MeasurementRepository
 import proba.model.AverageHealthStatus
 import proba.model.HealthRecord
 import reactor.core.publisher.Mono
@@ -25,10 +24,10 @@ class HealthRecordController(val repository: HealthRecordRepository) {
                 repository.findByProfileId(profileId)
                 .collectList()
                 .flatMap { list ->
-                    list.groupBy({it.measurementId}, {it.value}).forEach { measurement ->
+                    list.groupBy({it.measurementName}, {it.value}).forEach { measurement ->
                         val cnt = measurement.value.size
                         val avg = measurement.value.reduce{acc, element -> acc + element} / cnt
-                        avgMeasurements[measurement.key.toString()] = mapOf(cnt to avg)
+                        avgMeasurements[measurement.key] = mapOf(cnt to avg)
                     }
                 Mono.just(AverageHealthStatus(avgMeasurements))
                 }
