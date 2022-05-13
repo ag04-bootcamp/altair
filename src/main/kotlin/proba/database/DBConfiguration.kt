@@ -11,14 +11,20 @@ open class DBConfiguration(db: DatabaseClient) {
                     id SERIAL PRIMARY KEY,
                     first_name VARCHAR(20) NOT NULL,
                     last_name VARCHAR(20) NOT NULL,
-                    birth_date TIMESTAMP NOT NULL
+                    birth_date TIMESTAMP NOT NULL,
+                    weight DECIMAL NOT NULL,
+                    height DECIMAL NOT NULL,
+                    personal_observation VARCHAR(200)
+                );
+                CREATE TABLE IF NOT EXISTS measurement(
+                    id SERIAL PRIMARY KEY,
+                    name VARCHAR(20) NOT NULL
                 );
                 CREATE TABLE IF NOT EXISTS health_record(
                     id SERIAL PRIMARY KEY,
                     profile_id INTEGER NOT NULL,
-                    temperature DECIMAL NOT NULL,
-                    blood_pressure DECIMAL NOT NULL,
-                    heart_rate DECIMAL NOT NULL,
+                    measurement_id INTEGER NOT NULL,
+                    value DECIMAL NOT NULL,
                     date TIMESTAMP NOT NULL
                 );
             """
