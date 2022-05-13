@@ -5,5 +5,7 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
 @Table
-data class Profile(@Id var id:Long?, var firstName: String,
-                   var lastName: String, var birthDate: LocalDateTime)
+data class Profile(@Id val id:Long?, var firstName: String,
+                   var lastName: String, var birthDate: LocalDateTime,
+                   var weight: Double, var height: Double,
+                   var personalObservation: String)

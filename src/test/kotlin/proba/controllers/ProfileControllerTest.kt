@@ -22,7 +22,8 @@ open class ProfileControllerTest {
     fun setup() {
         client = WebTestClient.bindToController(controller).build()
         profile = Profile(id = null,"ana",
-            "nesto", LocalDateTime.now())
+            "nesto", LocalDateTime.now(),
+            87.2, 176.9, "povremene glavobolje kaze Karlo :D")
     }
 
     @Test

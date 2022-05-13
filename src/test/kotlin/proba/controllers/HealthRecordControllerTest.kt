@@ -22,8 +22,8 @@ internal class HealthRecordControllerTest {
     @BeforeEach
     fun setUp() {
         client = WebTestClient.bindToController(controller).build()
-        healthRecord = HealthRecord(id = null, 1, 37.2,
-            130.1, 77.3, LocalDate.now())
+        healthRecord = HealthRecord(id = null, 1, 37,
+            130.1, LocalDate.now())
     }
 
     @Test

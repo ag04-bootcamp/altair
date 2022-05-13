@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import proba.database.repository.HealthRecordRepository
+import proba.database.repository.MeasurementRepository
 import proba.model.AverageHealthStatus
 import proba.model.HealthRecord
 import reactor.core.publisher.Mono
@@ -13,31 +14,23 @@ import reactor.core.publisher.Mono
 @RestController
 class HealthRecordController(val repository: HealthRecordRepository) {
 
-    private var cnt: Int = 0
+    var avgMeasurements = HashMap<String, Map<Int, Double>>()
 
-    @PostMapping("/health/{profileId}/record")
-    fun storeHealthRecord(@PathVariable("profileId") profileId: Long,
-                          @RequestBody record: HealthRecord): Mono<HealthRecord> =
-                                repository.save(record)
+    @PostMapping("/health/record")
+    fun storeHealthRecord(@RequestBody record: HealthRecord):
+            Mono<HealthRecord> = repository.save(record)
 
     @GetMapping("/health/{profileId}/avg")
     fun fetchHealthRecordAverage(@PathVariable("profileId") profileId: Long): Mono<AverageHealthStatus> =
-            repository.findByProfileId(profileId)
-                .doFirst {
-                    cnt = 1
+                repository.findByProfileId(profileId)
+                .collectList()
+                .flatMap { list ->
+                    list.groupBy({it.measurementId}, {it.value}).forEach { measurement ->
+                        val cnt = measurement.value.size
+                        val avg = measurement.value.reduce{acc, element -> acc + element} / cnt
+                        avgMeasurements[measurement.key.toString()] = mapOf(cnt to avg)
+                    }
+                Mono.just(AverageHealthStatus(avgMeasurements))
                 }
-                .reduce(fun(acc, record): HealthRecord {
-                    ++cnt
-                    acc.bloodPressure += record.bloodPressure
-                    acc.heartRate += record.heartRate
-                    acc.temperature += record.temperature
-                    return acc
-                })
-                .map { s ->
-                    return@map AverageHealthStatus(
-                        cnt, s.temperature / cnt,
-                        s.bloodPressure / cnt,
-                        s.heartRate / cnt
-                    )
-                }
+
 }
