@@ -1,42 +1,39 @@
 package proba.controllers
 
+import org.junit.jupiter.api.Test
+
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Order
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
-import proba.model.Profile
+import proba.model.Users
 import java.time.LocalDateTime
 
 @SpringBootTest
-@Order(2)
-open class ProfileControllerTest {
+@Order(1)
+internal class UsersControllerTest {
 
     lateinit var client: WebTestClient
-    lateinit var profile: Profile
+    lateinit var users: Users
 
     @Autowired
-    lateinit var controller: ProfileController
+    lateinit var controller: UsersController
 
     @BeforeEach
     fun setup() {
         client = WebTestClient.bindToController(controller).build()
-        profile = Profile(id = null,1,
-            58.9, 172.0,
-            "povremene glavobolje kaze Karlo :D")
+        users = Users(id = null, "ana", "nestostop", LocalDateTime.now(),
+                "blbla", "rha", "fgjw")
     }
-
     @Test
-    fun whenRequestProfile_thenStatusShouldBeOk() {
+    fun whenSaveUser_thenStatusShouldBeOk() {
         client.post()
-            .uri("/profile")
+            .uri("/users")
             .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(profile)
+            .bodyValue(users)
             .exchange()
             .expectStatus().isOk
     }
-
-
 }

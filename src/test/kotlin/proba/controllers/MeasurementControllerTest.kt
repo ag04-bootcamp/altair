@@ -1,38 +1,37 @@
 package proba.controllers
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
-import proba.model.HealthRecord
-import java.time.LocalDate
+import proba.model.Measurement
 
 @SpringBootTest
-internal class HealthRecordControllerTest {
+@Order(3)
+open class MeasurementControllerTest {
 
     lateinit var client: WebTestClient
-    lateinit var healthRecord: HealthRecord
+    lateinit var measurement: Measurement
 
     @Autowired
-    lateinit var controller: HealthRecordController
+    lateinit var controller: MeasurementController
 
     @BeforeEach
-    fun setUp() {
+    fun setup() {
         client = WebTestClient.bindToController(controller).build()
-        healthRecord = HealthRecord(id = null, 1, "heart rate",
-            130.1, LocalDate.now())
+        measurement = Measurement(id = null, "heart rate")
     }
 
-  /*  @Test
-    fun whenRequestHealthRecord_thenStatusShouldBeOk() {
+    @Test
+    fun whenSaveMeasurement_thenStatusShouldBeOk() {
         client.post()
-            .uri("/health/1/record")
+            .uri("/measurement")
             .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(healthRecord)
+            .bodyValue(measurement)
             .exchange()
             .expectStatus().isOk
-    } */
+    }
 }
