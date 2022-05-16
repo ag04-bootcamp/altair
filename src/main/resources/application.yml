@@ -10,3 +10,8 @@ management:
     web:
       exposure:
         include: health,metrics
+
+springdoc:
+  api-docs:
+    groups:
+      enabled: true

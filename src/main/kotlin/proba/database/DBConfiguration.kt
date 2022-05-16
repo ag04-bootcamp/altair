@@ -7,7 +7,7 @@ import org.springframework.r2dbc.core.DatabaseClient
 open class DBConfiguration(db: DatabaseClient) {
     init {
         val initDb = db.sql {
-            """ CREATE TABLE IF NOT EXISTS profile (
+            """ CREATE TABLE IF NOT EXISTS profile(
                     id SERIAL PRIMARY KEY,
                     user_id INTEGER NOT NULL,
                     weight DECIMAL NOT NULL,
@@ -25,7 +25,7 @@ open class DBConfiguration(db: DatabaseClient) {
                     value DECIMAL NOT NULL,
                     date TIMESTAMP NOT NULL
                 );
-                CREATE TABLE IF NOT EXISTS user(
+                CREATE TABLE IF NOT EXISTS users(
                     id SERIAL PRIMARY KEY,
                     first_name VARCHAR(20) NOT NULL,
                     last_name VARCHAR(20) NOT NULL,

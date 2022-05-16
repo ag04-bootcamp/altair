@@ -28,6 +28,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc:2.5.2")
     // https://mvnrepository.com/artifact/io.r2dbc/r2dbc-postgresql
     runtimeOnly("io.r2dbc:r2dbc-postgresql:0.8.10.RELEASE")
+    implementation("org.springdoc:springdoc-openapi-webflux-core:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.0")
 
 
 
