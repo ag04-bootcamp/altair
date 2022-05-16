@@ -1,6 +1,7 @@
 package proba.controllers
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -11,6 +12,7 @@ import proba.model.HealthRecord
 import java.time.LocalDate
 
 @SpringBootTest
+@Order(4)
 internal class HealthRecordControllerTest {
 
     lateinit var client: WebTestClient
@@ -26,13 +28,13 @@ internal class HealthRecordControllerTest {
             130.1, LocalDate.now())
     }
 
-  /*  @Test
+    @Test
     fun whenRequestHealthRecord_thenStatusShouldBeOk() {
         client.post()
-            .uri("/health/1/record")
+            .uri("/health/record")
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(healthRecord)
             .exchange()
             .expectStatus().isOk
-    } */
+    }
 }
