@@ -1,5 +1,8 @@
 package proba.controllers
 
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.enums.ParameterIn
+import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.http.MediaType
@@ -9,13 +12,18 @@ import org.springframework.web.bind.annotation.*
 import proba.service.FileService
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import javax.print.attribute.standard.Media
 
 @RestController
 class FileController {
     @Autowired
     private lateinit var fileService: FileService
-
-    @PostMapping("file/{*path}")
+    @CrossOrigin(origins = ["*"])
+    @PostMapping(
+        "file/{*path}",
+        consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
+        produces = [MediaType.TEXT_PLAIN_VALUE]
+    )
     fun upload(
         @PathVariable path: String,
         @RequestPart("files") filesFlux: Flux<FilePart>
@@ -25,7 +33,7 @@ class FileController {
             .then(Mono.just("Resource successfully created"))
     }
 
-    @PostMapping("file/dir/{*path}")
+    @PostMapping("file/dir/{*path}", produces = [MediaType.TEXT_PLAIN_VALUE])
     fun createFolder(
         @PathVariable path: String,
     ): ResponseEntity<String> {
@@ -33,7 +41,10 @@ class FileController {
         return ResponseEntity.ok("Directory successfully created")
     }
 
-    @GetMapping("file/{*path}")
+    @GetMapping(
+        "file/{*path}",
+        produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE, MediaType.APPLICATION_JSON_VALUE]
+    )
     fun getFile(
         @PathVariable path: String,
     ): ResponseEntity<Mono<Resource>?> {
