@@ -8,17 +8,16 @@ import org.springframework.http.codec.multipart.FilePart
 import org.springframework.stereotype.Service
 import proba.model.FileModel
 import reactor.core.publisher.Mono
-import reactor.core.publisher.toMono
-import java.io.BufferedOutputStream
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
 import javax.annotation.PostConstruct
+import kotlin.io.path.Path
 
 @Service
 class FileService {
-    private val basePathString = "./resources"
+    private val basePathString = "./resources/"
     private val basePath: Path = Paths.get(basePathString)
 
     @PostConstruct
@@ -26,47 +25,77 @@ class FileService {
         createDirectoryIfNotExists()
     }
 
-    private fun createDirectoryIfNotExists(localPath: String = "") {
+    private fun String.buildPath(): String {
+        val paths = this.split("/")
+        var newPath = ""
+
+        paths.forEachIndexed { index, path ->
+            if (path != "") {
+                newPath += path
+                if (index != paths.size - 1) newPath += "/"
+            }
+        }
+        return newPath
+    }
+
+    private fun fileExists(localPath: String = ""): Pair<Boolean, File> {
         val path = basePathString + localPath
-        val directory = File(path)
-        if (!directory.exists()) {
+        val file = File(path.buildPath())
+        if (!file.exists()) {
+            return Pair(false, file)
+        }
+        return Pair(true, file)
+    }
+
+    private fun createDirectoryIfNotExists(localPath: String = "") {
+        val (exists, file) = fileExists(localPath)
+        if (!exists) {
+            file.mkdir()
             if (localPath == "") println("Creating resources directory... ")
-            directory.mkdir();
         }
     }
 
-    private fun createDirectories(dirs: List<String>) {
+    private fun createDirectories(path: String) {
+        val dirs = path.split("/")
         dirs.forEachIndexed { index, _ ->
-            createDirectoryIfNotExists("/" + (dirs.subList(0, index + 1).joinToString("/")))
+            createDirectoryIfNotExists((dirs.subList(0, index + 1).joinToString("/")))
         }
     }
 
     fun saveFile(path: String, file: FilePart): Mono<Unit> {
-        createDirectories(path.split("/"))
-        return file.transferTo(basePath.resolve("$path/${file.filename()}"))
-            .map { it }
+        createDirectories(path.buildPath())
+        return file.transferTo(Path("$basePath/$path/${file.filename()}")).map {}
     }
 
-    fun findFile(path: String): Mono<Resource> {
-        var file = File("$basePathString/$path")
-        if(file.isFile){
-            return Mono.just(FileSystemResource(file))
+    //Triple(isFound, isFile, Resource)
+    fun findFile(pathReq: String): Triple<Boolean, Boolean, Mono<Resource>?> {
+        val path = pathReq.buildPath()
+
+        //if only directory is sent create it in case it is first time that user wants to get files
+        if (path.split("/").size == 1) {
+            createDirectoryIfNotExists(path)
         }
-        // it is directory
+
+        val (exists, file) = fileExists(path)
+        if (!exists) return Triple(false, false, null)
+        if (file.isFile) {
+            return Triple(true, true, Mono.just(FileSystemResource(file)))
+        }
+
         val filesInDir = file.listFiles()
-        var files = mutableListOf<FileModel>()
-        for (file in filesInDir){
-            if(file.isFile) {
-                files.add(FileModel(true, file.name, "$path/${file.name}"))
-                break
-            }
-            files.add(FileModel(false, file.name, "$path/${file.name}"))
+        val files = mutableListOf<FileModel>()
+        for (f in filesInDir!!) {
+            if (f.isFile) files.add(FileModel(true, f.name, "${path.buildPath()}${f.name}"))
+            else files.add(FileModel(false, f.name, "${path.buildPath()}${f.name}"))
         }
-        var out = ByteArrayOutputStream()
-        var mapper = ObjectMapper()
+        val out = ByteArrayOutputStream()
+        val mapper = ObjectMapper()
         mapper.writeValue(out, files)
 
-        return Mono.just(ByteArrayResource(out.toByteArray()))
+        return Triple(true, false, Mono.just(ByteArrayResource(out.toByteArray())))
+    }
 
+    fun saveDir(pathReq: String){
+        createDirectories(pathReq.buildPath())
     }
 }
