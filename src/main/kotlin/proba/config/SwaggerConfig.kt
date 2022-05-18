@@ -39,4 +39,12 @@ open class SwaggerConfig {
             .pathsToMatch("/users/**")
             .build()
     }
+
+    @Bean
+    open fun fileGroupApi(): GroupedOpenApi? {
+        return GroupedOpenApi.builder()
+            .group("Upload file")
+            .pathsToMatch("/file/**")
+            .build()
+    }
 }
