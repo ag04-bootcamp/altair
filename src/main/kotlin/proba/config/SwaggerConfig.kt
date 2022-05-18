@@ -31,4 +31,12 @@ open class SwaggerConfig {
             .pathsToMatch("/measurement/**")
             .build()
     }
+
+    @Bean
+    open fun usersGroupApi(): GroupedOpenApi? {
+        return GroupedOpenApi.builder()
+            .group("Users")
+            .pathsToMatch("/users/**")
+            .build()
+    }
 }
