@@ -43,7 +43,7 @@ open class SwaggerConfig {
     @Bean
     open fun fileGroupApi(): GroupedOpenApi? {
         return GroupedOpenApi.builder()
-            .group("Upload file")
+            .group("Files")
             .pathsToMatch("/file/**")
             .build()
     }

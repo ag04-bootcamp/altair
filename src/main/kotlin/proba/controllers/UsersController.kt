@@ -1,32 +1,27 @@
 package proba.controllers
 
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
-import proba.database.repository.UsersRepository
+import org.springframework.web.bind.annotation.*
 import proba.model.Users
+import proba.service.UsersService
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
-class UsersController(val repository: UsersRepository) {
+class UsersController(private val service: UsersService) {
 
     @PostMapping("/users")
     fun save(@RequestBody users: Users): Mono<Users> =
-        repository.save(users)
+        service.saveUser(users)
 
     @GetMapping("/users")
     fun getAllUsers(): Flux<Users> =
-        repository.findAll()
+        service.getAllUsers()
 
     @GetMapping("/users/{userId}")
     fun getById(@PathVariable userId: Long):
-            Mono<Users> = repository.findById(userId)
+            Mono<Users> = service.getUserById(userId)
 
     @DeleteMapping("/users/{userId}")
     fun deleteById(@PathVariable userId: Long):
-            Mono<Void> = repository.deleteById(userId)
+            Mono<Void> = service.deleteUser(userId)
 }

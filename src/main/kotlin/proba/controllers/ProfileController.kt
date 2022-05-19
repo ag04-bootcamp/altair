@@ -1,33 +1,35 @@
 package proba.controllers
 
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.multipart.MultipartFile
-import proba.database.repository.ProfileRepository
+import org.springframework.web.bind.annotation.*
 import proba.model.Profile
+import proba.service.ProfileService
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
-class ProfileController(val repository: ProfileRepository) {
+class ProfileController(private val service: ProfileService) {
 
     @PostMapping("/profile")
     fun save(@RequestBody
-             profile: Profile): Mono<Profile> = repository.save(profile)
+             profile: Profile): Mono<Profile> = service.save(profile)
+
+    @GetMapping("/profile/user")
+    fun getAllProfilesForUser(@RequestParam userId: Long): Flux<Profile> =
+        service.getAllForUser(userId)
+
+    @GetMapping("/profile")
+    fun getAll(): Flux<Profile> =
+        service.getAllProfiles()
 
     @GetMapping("/profile/{profileId}")
     fun getProfile(@PathVariable profileId: Long):
-            Mono<Profile> = repository.findById(profileId)
+            Mono<Profile> = service.getById(profileId)
 
     @DeleteMapping("/profile/{profileId}")
     fun deleteByProfileId(@PathVariable profileId: Long):
-            Mono<Void> = repository.deleteById(profileId)
+            Mono<Void> = service.deleteProfile(profileId)
 
     @DeleteMapping("/profile/{userId}")
     fun deleteAllByUser(@PathVariable userId: Long):
-            Flux<Void> = repository.deleteByUserId(userId)
+            Mono<Void> = service.deleteAllUserProfiles(userId)
 }
