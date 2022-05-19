@@ -1,8 +1,5 @@
 package proba.controllers
 
-import io.swagger.v3.oas.annotations.Parameter
-import io.swagger.v3.oas.annotations.enums.ParameterIn
-import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.http.MediaType
@@ -12,13 +9,12 @@ import org.springframework.web.bind.annotation.*
 import proba.service.FileService
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import javax.print.attribute.standard.Media
 
 @RestController
 class FileController {
     @Autowired
     private lateinit var fileService: FileService
-    @CrossOrigin(origins = ["*"])
+   @CrossOrigin(origins = ["*"])
     @PostMapping(
         "file/{*path}",
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],

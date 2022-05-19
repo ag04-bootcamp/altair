@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import proba.model.Profile
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 @SpringBootTest
 @Order(2)
@@ -25,7 +25,7 @@ open class ProfileControllerTest {
         client = WebTestClient.bindToController(controller).build()
         profile = Profile(id = null,1,
             58.9, 172.0,
-            "povremene glavobolje kaze Karlo :D")
+            "povremene glavobolje kaze Karlo :D", LocalDate.now())
     }
 
     @Test

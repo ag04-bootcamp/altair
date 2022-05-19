@@ -12,7 +12,8 @@ open class DBConfiguration(db: DatabaseClient) {
                     user_id INTEGER NOT NULL,
                     weight DECIMAL NOT NULL,
                     height DECIMAL NOT NULL,
-                    personal_observation VARCHAR(200)
+                    personal_observation VARCHAR(200),
+                    date TIMESTAMP NOT NULL
                 );
                 CREATE TABLE IF NOT EXISTS measurement(
                     id SERIAL PRIMARY KEY,
