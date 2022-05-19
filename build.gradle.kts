@@ -32,8 +32,6 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.8")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
 
-
-
 }
 
 tasks.test {

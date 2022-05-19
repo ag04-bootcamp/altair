@@ -14,7 +14,6 @@ import reactor.core.publisher.Mono
 class FileController {
     @Autowired
     private lateinit var fileService: FileService
-   @CrossOrigin(origins = ["*"])
     @PostMapping(
         "file/{*path}",
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
