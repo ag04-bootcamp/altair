@@ -26,16 +26,10 @@ class FileService {
     }
 
     private fun String.buildPath(): String {
-        val paths = this.split("/")
-        var newPath = ""
-
-        paths.forEachIndexed { index, path ->
-            if (path != "") {
-                newPath += path
-                if (index != paths.size - 1) newPath += "/"
-            }
-        }
-        return newPath
+        return this
+            .replace(Regex("(\\/){2,}"), "/")
+            .dropWhile { it == '/' }
+            .dropLastWhile{ it == '/' }
     }
 
     private fun fileExists(localPath: String = ""): Pair<Boolean, File> {
@@ -63,6 +57,7 @@ class FileService {
     }
 
     fun saveFile(path: String, file: FilePart): Mono<Unit> {
+        createDirectoryIfNotExists()
         createDirectories(path.buildPath())
         return file.transferTo(Path("$basePath/$path/${file.filename()}")).map {}
     }
