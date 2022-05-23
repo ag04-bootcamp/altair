@@ -1,3 +1,3 @@
 
-rootProject.name = "proba"
+rootProject.name = "altair"
 
