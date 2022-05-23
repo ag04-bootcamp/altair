@@ -1,12 +1,12 @@
 package altair.controllers
 
+import altair.service.FileService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.http.codec.multipart.FilePart
 import org.springframework.web.bind.annotation.*
-import altair.service.FileService
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono
 class FileController {
     @Autowired
     private lateinit var fileService: FileService
+
     @PostMapping(
         "file/{*path}",
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
@@ -29,12 +30,34 @@ class FileController {
     }
 
     @PostMapping("file/dir/{*path}", produces = [MediaType.TEXT_PLAIN_VALUE])
-    fun createFolder(
+    fun createDirectory(
         @PathVariable path: String,
     ): ResponseEntity<String> {
-        fileService.saveDir(path)
+        fileService.createDir(path)
         return ResponseEntity.ok("Directory successfully created")
     }
+
+    @DeleteMapping("file/{*path}", produces = [MediaType.TEXT_PLAIN_VALUE])
+    fun deleteFile(
+        @PathVariable path: String,
+    ): ResponseEntity<String> {
+        val deleted = fileService.deleteFile(path)
+        return if (deleted) ResponseEntity.ok("Resource successfully removed")
+        else ResponseEntity.status(404).body("Does not exist")
+    }
+
+    @PutMapping("file/{*path}", produces = [MediaType.TEXT_PLAIN_VALUE])
+    fun renameFile(
+        @PathVariable path: String,
+        @RequestPart newName: String
+    ): ResponseEntity<String> {
+        val (exist, success) = fileService.renameFile(path, newName)
+        return if (!exist) ResponseEntity.status(404).body("File not found")
+        else if (!success) ResponseEntity.status(400).body("Name already exist")
+        else ResponseEntity.ok("Resource successfully renamed")
+
+    }
+
 
     @GetMapping(
         "file/{*path}",

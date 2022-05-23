@@ -7,6 +7,7 @@ import org.springframework.core.io.Resource
 import org.springframework.http.codec.multipart.FilePart
 import org.springframework.stereotype.Service
 import altair.model.FileModel
+import org.springframework.util.FileSystemUtils
 import reactor.core.publisher.Mono
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -27,9 +28,9 @@ class FileService {
 
     private fun String.buildPath(): String {
         return this
-            .replace(Regex("(\\/){2,}"), "/")
+            .replace(Regex("(/){2,}"), "/")
             .dropWhile { it == '/' }
-            .dropLastWhile{ it == '/' }
+            .dropLastWhile { it == '/' }
     }
 
     private fun fileExists(localPath: String = ""): Pair<Boolean, File> {
@@ -54,6 +55,24 @@ class FileService {
         dirs.forEachIndexed { index, _ ->
             createDirectoryIfNotExists((dirs.subList(0, index + 1).joinToString("/")))
         }
+    }
+
+    fun deleteFile(path: String): Boolean {
+        return FileSystemUtils.deleteRecursively(Path("$basePathString${path.buildPath()}"))
+    }
+
+    // returns exists, success
+    fun renameFile(path: String, newName: String): Pair<Boolean, Boolean> {
+        var file = File("$basePathString${path.buildPath()}")
+        if (!file.exists()) {
+            return Pair(false, false)
+        }
+        val newFilePath = path.split("/").dropLast(1).joinToString("/") + "/$newName"
+        var newFile = File("$basePathString$newFilePath")
+        if (newFile.exists()) {
+            return Pair(true, false)
+        }
+        return Pair(true, file.renameTo(newFile))
     }
 
     fun saveFile(path: String, file: FilePart): Mono<Unit> {
@@ -90,7 +109,7 @@ class FileService {
         return Triple(true, false, Mono.just(ByteArrayResource(out.toByteArray())))
     }
 
-    fun saveDir(pathReq: String){
+    fun createDir(pathReq: String) {
         createDirectories(pathReq.buildPath())
     }
 }
