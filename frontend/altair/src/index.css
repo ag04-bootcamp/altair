@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.root {
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: rgb(226, 255, 233);
+  background: linear-gradient(
+    103deg,
+    rgba(226, 255, 233, 1) 0%,
+    rgba(255, 255, 255, 1) 49%,
+    rgba(226, 255, 233, 1) 100%
+  );
+  position: relative;
+  min-height: 100vh;
+}
+
+form {
+  margin: 3rem auto;
+
+  border-radius: 5px;
+  padding: 3rem;
+  text-align: start;
+  color: #333;
+  border: 10px solid #aad0b2;
+  width: fit-content;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+  border: none;
+  background: rgb(226, 255, 233);
+  background: linear-gradient(
+    103deg,
+    rgba(226, 255, 233, 1) 0%,
+    rgba(255, 255, 255, 1) 49%,
+    rgba(226, 255, 233, 1) 100%
+  );
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

@@ -1,0 +1,32 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: (auto-fill, 1fr);
+}
+
+.startColor {
+  background-color: #95c59f;
+}
+
+.start {
+  padding: 0.8rem 2rem;
+
+  border: none;
+  color: #fff;
+  border-radius: 9px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 4rem;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: #d5e8d8;
+    cursor: pointer;
+  }
+}
+
+.center-card {
+  Card {
+    margin: 0 auto;
+  }
+}

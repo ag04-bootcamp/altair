@@ -1,0 +1,32 @@
+.card {
+  width: fit-content;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 9px;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 1rem;
+  text-align: left;
+  border: 1px solid #16451f;
+  padding: 2rem;
+  background: rgb(43, 138, 62);
+  background: linear-gradient(
+    103deg,
+    rgba(43, 138, 62, 1) 0%,
+    rgba(107, 173, 120, 1) 49%,
+    rgba(43, 138, 62, 1) 100%
+  );
+
+  h2 {
+    font-weight: 300;
+    font-size: 1rem;
+
+    .card-icon {
+      margin-top: 0.5rem;
+      height: 1.2rem;
+      width: 1.2rem;
+      align-self: flex-end;
+      margin-right: 0.5rem;
+    }
+  }
+}

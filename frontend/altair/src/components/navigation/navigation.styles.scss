@@ -1,0 +1,64 @@
+.navigation {
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgb(30, 97, 43);
+  background: linear-gradient(
+    90deg,
+    #007a2f 3%,
+    hsl(132, 52%, 35%) 26%,
+    hsl(132, 29%, 61%) 100%
+  );
+
+  .logo {
+    .headingLogo {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-weight: bold;
+      letter-spacing: 2px;
+      cursor: pointer;
+
+      .logo-img {
+        background-color: #007a2f;
+        width: 10rem;
+        height: 3rem;
+        background-color: #007a2f;
+      }
+    }
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+
+    a:link {
+      height: 100%;
+      padding: 0.9rem 1rem;
+      transition: all 0.4s ease;
+
+      &:hover {
+        background-color: #2b8a3e;
+        border-radius: 3px;
+      }
+
+      &:active,
+      &:focus {
+        background-color: #2b8a3e;
+      }
+    }
+  }
+
+  div {
+    padding-right: 3rem;
+
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: #fff;
+
+      &:hover {
+      }
+    }
+  }
+}
