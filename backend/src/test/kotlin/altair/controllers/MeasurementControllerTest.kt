@@ -22,7 +22,8 @@ open class MeasurementControllerTest {
     @BeforeEach
     fun setup() {
         client = WebTestClient.bindToController(controller).build()
-        measurement = Measurement(id = null, "heart rate")
+        measurement = Measurement(id = null, "heart rate",
+            "60", "140", "celsius")
     }
 
     @Test

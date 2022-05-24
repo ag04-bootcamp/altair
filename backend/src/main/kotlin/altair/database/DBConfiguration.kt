@@ -17,7 +17,10 @@ open class DBConfiguration(db: DatabaseClient) {
                 );
                 CREATE TABLE IF NOT EXISTS measurement(
                     id SERIAL PRIMARY KEY,
-                    name VARCHAR(20) NOT NULL
+                    name VARCHAR(20) NOT NULL,
+                    bottom_value VARCHAR(10),
+                    top_value VARCHAR(10),
+                    unit VARCHAR(10)
                 );
                 CREATE TABLE IF NOT EXISTS health_record(
                     id SERIAL PRIMARY KEY,
