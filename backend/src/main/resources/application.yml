@@ -2,8 +2,8 @@
 spring:
   r2dbc:
     url: r2dbc:postgresql://localhost/health_proba
-    username: postgres
-    password: postgres
+    username: test
+    password: test
 
 management:
   endpoints:

@@ -26,3 +26,11 @@ and with **altair**, you can be healthy too!
 - [x] endpoints, endpoints and endpoints
 - [x] db models
 
+
+### Ending
+
+So we mentioned our dedicated team a few times, if you are curious about whom they might be, here is a comprehensive list of our heroes:
+
+- Ana Malinar
+- Ante Latinčić
+- Karlo Maros
