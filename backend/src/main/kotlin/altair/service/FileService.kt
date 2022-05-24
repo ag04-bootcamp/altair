@@ -11,20 +11,26 @@ import org.springframework.util.FileSystemUtils
 import reactor.core.publisher.Mono
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.nio.file.Path
-import java.nio.file.Paths
 import javax.annotation.PostConstruct
 import kotlin.io.path.Path
 
+
+var basePath = "./uploads/"
+const val dirName = "uploads"
+fun initBasePath(absPath: String?) {
+    if (absPath==null) return
+    basePath = "$absPath/$dirName/"
+}
+
 @Service
 class FileService {
-    private val basePathString = "./resources/"
-    private val basePath: Path = Paths.get(basePathString)
+
 
     @PostConstruct
     fun init() {
         createDirectoryIfNotExists()
     }
+
 
     private fun String.buildPath(): String {
         return this
@@ -32,10 +38,10 @@ class FileService {
             .dropWhile { it == '/' }
             .dropLastWhile { it == '/' }
     }
-
+    // returns exists, file
     private fun fileExists(localPath: String = ""): Pair<Boolean, File> {
-        val path = basePathString + localPath
-        val file = File(path.buildPath())
+        val path = basePath + localPath.buildPath()
+        val file = File(path)
         if (!file.exists()) {
             return Pair(false, file)
         }
@@ -46,7 +52,7 @@ class FileService {
         val (exists, file) = fileExists(localPath)
         if (!exists) {
             file.mkdir()
-            if (localPath == "") println("Creating resources directory... ")
+            if (localPath == "") println("Creating uploads directory.. ")
         }
     }
 
@@ -58,17 +64,17 @@ class FileService {
     }
 
     fun deleteFile(path: String): Boolean {
-        return FileSystemUtils.deleteRecursively(Path("$basePathString${path.buildPath()}"))
+        return FileSystemUtils.deleteRecursively(Path("$basePath${path.buildPath()}"))
     }
 
     // returns exists, success
     fun renameFile(path: String, newName: String): Pair<Boolean, Boolean> {
-        var file = File("$basePathString${path.buildPath()}")
+        val file = File("$basePath${path.buildPath()}")
         if (!file.exists()) {
             return Pair(false, false)
         }
         val newFilePath = path.split("/").dropLast(1).joinToString("/") + "/$newName"
-        var newFile = File("$basePathString$newFilePath")
+        val newFile = File("$basePath$newFilePath")
         if (newFile.exists()) {
             return Pair(true, false)
         }
@@ -99,8 +105,8 @@ class FileService {
         val filesInDir = file.listFiles()
         val files = mutableListOf<FileModel>()
         for (f in filesInDir!!) {
-            if (f.isFile) files.add(FileModel(true, f.name, "${path.buildPath()}${f.name}"))
-            else files.add(FileModel(false, f.name, "${path.buildPath()}${f.name}"))
+            if (f.isFile) files.add(FileModel(true, f.name, "${path.buildPath()}/${f.name}"))
+            else files.add(FileModel(false, f.name, "${path.buildPath()}/${f.name}"))
         }
         val out = ByteArrayOutputStream()
         val mapper = ObjectMapper()
