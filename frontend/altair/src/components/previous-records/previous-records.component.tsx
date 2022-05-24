@@ -33,7 +33,6 @@ const PreviousRecords = () => {
       if ((response.statusText = "OK")) {
         setIsLoading(false);
       }
-      console.log(response.data);
     };
 
     fetchRecords();
