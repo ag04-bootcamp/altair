@@ -112,6 +112,7 @@ const HealthRecord = () => {
             required
             id="measurement"
             type="number"
+            step="0.01"
           />
         </div>
 
