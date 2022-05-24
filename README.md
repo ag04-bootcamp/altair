@@ -6,9 +6,9 @@ kud cemo odleprsati, to cemo tek vidjeti :D
 
 sto sljedece?
 
-- [ ] swagger dokumentacija
-- [ ] ekrane s formama
-- [ ] upload fileova
+- [x] swagger dokumentacija
+- [x] ekrane s formama
+- [x] upload fileova
 - [x] jos endpointa
 - [x] posirit modele
 - [x] promijenit bazu - tablica measurementa i tablica s vrijednostima
