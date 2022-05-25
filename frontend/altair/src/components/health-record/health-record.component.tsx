@@ -30,12 +30,12 @@ const HealthRecord = () => {
           "http://localhost:8080/measurement/all"
         );
 
+        console.log(response.data);
+
         response.data?.map((measurement) => {
           dispatch(add(measurement.name));
         });
       };
-
-      console.log(options1);
 
       fetchData();
     }

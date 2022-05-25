@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import altair.model.Measurement
 import altair.service.MeasurementService
+import org.springframework.web.bind.annotation.CrossOrigin
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
+@CrossOrigin(origins = ["*"])
 class MeasurementController(private val service: MeasurementService) {
 
     @PostMapping("/measurement")
