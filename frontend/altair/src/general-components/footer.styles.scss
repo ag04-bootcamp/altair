@@ -35,5 +35,11 @@ footer {
     width: 2rem;
     color: #1a5325;
     cursor: pointer;
+
+    transition: all 0.4s ease;
+
+    &:hover {
+      color: #2b8a3e;
+    }
   }
 }

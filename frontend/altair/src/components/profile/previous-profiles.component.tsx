@@ -6,6 +6,8 @@ import axios from "axios";
 import Card from "../../general-components/card.component.tsx";
 // @ts-ignore
 import LoadingSpinner from "../../general-components/spinner.component.tsx";
+// @ts-ignore
+import Pagination from "../../general-components/pagination.component.tsx";
 
 let i = 0;
 const PreviuosProfiles = () => {
@@ -37,22 +39,7 @@ const PreviuosProfiles = () => {
           </div>
         )}
 
-        <div className="grid-profiles">
-          {!isLoading &&
-            profiles.map((profile) => {
-              return (
-                <div key={profile.id} className="profile-container">
-                  <h3>Profile</h3>
-                  <h2>Weight: {profile.weight}</h2>
-                  <h2>Height: {profile.height}</h2>
-                  <h2>Personal Observation: {profile.personalObservation}</h2>
-                  <h2>
-                    Date: {profile.date[2]}.{profile.date[1]}.{profile.date[0]}.
-                  </h2>
-                </div>
-              );
-            })}
-        </div>
+        {!isLoading && <Pagination profiles={profiles} />}
       </div>
     </div>
   );
