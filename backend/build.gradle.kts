@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.6.20"
 }
 
-group = "org.example"
+group = "altair"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -13,9 +13,6 @@ repositories {
 
 dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation(kotlin("test"))
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.6")
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
     implementation("org.springframework.boot:spring-boot-starter-parent:2.2.5.RELEASE")
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
@@ -31,6 +28,20 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-webflux-core:1.6.8")
     implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.8")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.8")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation("org.springframework.boot:spring-boot-starter-security:2.6.6")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.6.6")
+    // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
+
+    testImplementation(kotlin("test"))
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.6") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+    testImplementation("org.springframework.security:spring-security-test:5.5.2")
 
 }
 
