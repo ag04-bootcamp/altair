@@ -22,6 +22,8 @@ const HealthRecord = () => {
   let options1 = useSelector((state: any) => state.measurement.options);
   console.log(options1);
 
+  const userId = useSelector((state: any) => state.login.id);
+
   useEffect(() => {
     if (i === 0) {
       i++;
@@ -56,14 +58,17 @@ const HealthRecord = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const data = {
-      profileId: 1,
-      measurementName: measurement,
-      value,
-      date: birthDate,
-    };
+    if (userId !== null && measurement !== null && value !== null) {
+      const data = {
+        userId,
+        measurementName: measurement,
+        value,
+        date: birthDate,
+      };
 
-    console.log(data);
+      
+      
+    }
   };
 
   const valueHandler = (event) => {

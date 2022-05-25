@@ -36,7 +36,7 @@ const PreviousRecords = () => {
     };
 
     fetchRecords();
-  }, []);
+  }, [records]);
 
   return (
     <div>

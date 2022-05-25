@@ -1,6 +1,7 @@
 import "./footer.styles.scss";
 
 import { FacebookLogo, TwitterLogo, InstagramLogo } from "phosphor-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const year = `${new Date().getFullYear()}`;
@@ -37,6 +38,12 @@ const Footer = () => {
         >
           300 Hidden Figures Way SW Washington D.C., USA
         </a>
+      </div>
+
+      <div>
+        <Link to="/contact" className="copyright contact-link">
+          Contact
+        </Link>
       </div>
     </footer>
   );
