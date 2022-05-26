@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logIn, setName } from "redux/login.ts";
 import "./login-form.styles.scss";
-import { useSelector, useDispatch } from "react-redux";
-// @ts-ignore
-import { logIn, logOut, setName } from "../../redux/login.ts";
+
 
 const LoginForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const isLoggedIn = useSelector((state: any) => state.login.isLoggedIn);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -26,10 +25,10 @@ const LoginForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const data = {
-      userName,
-      password,
-    };
+    // const data = {
+    //   userName,
+    //   password,
+    // };
   };
 
   const loginHandler = async (event) => {

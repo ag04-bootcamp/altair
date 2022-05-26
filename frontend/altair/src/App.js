@@ -12,13 +12,12 @@ import HealthRecord from "./components/health-record/health-record.component.tsx
 import Contact from "./components/contact/contact.component.tsx";
 import Measurement from "./components/measurement/measurement.component.tsx";
 import PreviousRecords from "./components/previous-records/previous-records.component.tsx";
+import Files from "./components/files/files.component.tsx";
 import PreviuosProfiles from "./components/profile/previous-profiles.component.tsx";
 
-import { useSelector, useDispatch } from "react-redux";
-import { logIn, logOut } from "./redux/login.ts";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   return (
@@ -43,6 +42,7 @@ const App = () => {
           {isLoggedIn && (
             <Route path="/health-record" element={<HealthRecord />} />
           )}
+          {<Route path="/files/*" element={<Files />}/>}
           {isLoggedIn && (
             <Route path="/all-records" element={<PreviousRecords />} />
           )}

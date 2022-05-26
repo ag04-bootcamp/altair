@@ -1,10 +1,10 @@
-import "./measurement.styles.scss";
-import { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// @ts-ignore
-import { add, remove } from "../../redux/measurements.ts";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { add } from "redux/measurements.ts";
+import "./measurement.styles.scss";
+
 
 const Measurement = () => {
   const dispatch = useDispatch();

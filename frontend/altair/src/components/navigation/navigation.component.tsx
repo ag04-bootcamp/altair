@@ -1,10 +1,10 @@
-import "./navigation.styles.scss";
+import { default as Logo } from "assets/logo.svg";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-// @ts-ignore
-import { logIn, logOut } from "../../redux/login.ts";
-// @ts-ignore
-import { default as Logo } from "../../assets/logo.svg";
+import { logOut } from "redux/login.ts";
+import "./navigation.styles.scss";
+
+
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -26,12 +26,13 @@ const Navigation = () => {
     <nav className="navigation">
       <div className="logo">
         <span className="headingLogo">
-          <img onClick={logoHandler} src={Logo} className="logo-img" />
+          <img onClick={logoHandler} src={Logo} className="logo-img" alt="logo" />
         </span>
       </div>
       <div className="nav-container">
         {isLoggedIn && <Link to="/">Home</Link>}
         {isLoggedIn && <Link to="/profile">Profile</Link>}
+        {<Link to="/files">Files</Link>}
         {!isLoggedIn && <Link to="/login">Login</Link>}
         {isLoggedIn && (
           <Link onClick={logoutHandler} to="/">

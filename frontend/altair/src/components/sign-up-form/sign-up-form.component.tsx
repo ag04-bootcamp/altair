@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./sign-up-form.styles.scss";
-import DatePicker from "react-date-picker";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-// @ts-ignore
-import { logIn, logOut, signUp } from "../../redux/login.ts";
+import { useState } from "react";
+import DatePicker from "react-date-picker";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logIn } from "redux/login.ts";
+import "./sign-up-form.styles.scss";
+
 
 const SignUpForm = () => {
-  const [formatedDate, setFormatedDate] = useState("");
+  // const [formatedDate, setFormatedDate] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [birthDate, setBirthDate] = useState(new Date());
   const dispatch = useDispatch();
 
@@ -22,9 +22,9 @@ const SignUpForm = () => {
 
   const onChangeDate = (event) => {
     setBirthDate(event);
-    const now = new Date(event);
-    const dateString = `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`;
-    setFormatedDate(dateString);
+    // const now = new Date(event);
+    // const dateString = `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`;
+    // setFormatedDate(dateString);
   };
 
   const firstNameHandler = (event) => {
@@ -44,7 +44,7 @@ const SignUpForm = () => {
   };
 
   const confirmPasswordHandler = (event) => {
-    setConfirmPassword(event.target.value);
+    // setConfirmPassword(event.target.value);
   };
 
   const cancelHandler = () => {
@@ -84,7 +84,7 @@ const SignUpForm = () => {
           const response = await axios.get("http://localhost:8080/users");
           console.log(response.data);
 
-          response.data.map((user) => {
+          response.data.forEach((user) => {
             if (user.userName === userName) {
               dispatch(logIn(user.id));
               navigate("/");

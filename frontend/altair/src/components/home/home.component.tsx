@@ -1,25 +1,18 @@
+import img from "assets/cover.jpg";
+import LoadingSpinner from "general-components/spinner.component.tsx";
 import { useState } from "react";
-import "./home.styles.scss";
-// @ts-ignore
-import img from "../../assets/cover.jpg";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// @ts-ignore
-import LoadingSpinner from "../../general-components/spinner.component.tsx";
-import { useSelector, useDispatch } from "react-redux";
+import "./home.styles.scss";
+
+
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: any) => state.login.isLoggedIn);
-  const uName = useSelector((state: any) => state.login.userName);
-  const userId = useSelector((state: any) => state.login.id);
 
   const [loaded, setLoaded] = useState(false);
-
-  const startHandler = () => {
-    navigate("/profile");
-  };
 
   const loginHandler = () => {
     navigate("/login");

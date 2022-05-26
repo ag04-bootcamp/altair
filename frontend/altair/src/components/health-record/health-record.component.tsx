@@ -1,12 +1,12 @@
-import "./health-record.styles.scss";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import DatePicker from "react-date-picker";
-import Select from "react-select";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-// @ts-ignore
-import { add, remove } from "../../redux/measurements.ts";
+import { useEffect, useState } from "react";
+import DatePicker from "react-date-picker";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import { add } from "redux/measurements.ts";
+import "./health-record.styles.scss";
+
 
 let i = 0;
 
@@ -34,13 +34,14 @@ const HealthRecord = () => {
 
         console.log(response.data);
 
-        response.data?.map((measurement) => {
+        response.data?.forEach((measurement) => {
           dispatch(add(measurement.name));
         });
       };
 
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectoptions = options1.map((option) => {
@@ -66,20 +67,16 @@ const HealthRecord = () => {
         date: birthDate,
       };
 
-      const response = async () => {
-        const response = await axios.post(
-          "http://localhost:8080/health/record",
-          data
-        );
-
-        try {
-          if (response.statusText === "OK") {
-            navigate("/");
-          }
-        } catch (error) {
-          alert(error.message);
+      axios.post(
+        "http://localhost:8080/health/record",
+        data
+      ).then((response) => {
+        if (response.statusText === "OK") {
+          navigate("/");
         }
-      };
+      }).catch((error) => {
+        alert(error.message);
+      })
     }
   };
 

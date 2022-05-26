@@ -1,0 +1,32 @@
+.file {
+    margin: 10px;
+}
+.file:hover {
+    background-color: rgb(150, 190, 150);
+    cursor: pointer;
+}
+
+.file-display {
+    width: 100px;
+    height: 100px;
+}
+
+.folder-icon {
+    color: rgb(190, 150, 110);
+}
+.file-icon {
+    color: rgb(170, 170, 170);
+}
+
+.file-name {
+    max-width: 100px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.files-container {
+    display: flex;
+    flex-wrap: wrap;
+}

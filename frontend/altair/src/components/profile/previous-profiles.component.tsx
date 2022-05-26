@@ -2,14 +2,11 @@ import "./previous-profiles.styles.scss";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-// @ts-ignore
-import Card from "../../general-components/card.component.tsx";
-// @ts-ignore
-import LoadingSpinner from "../../general-components/spinner.component.tsx";
-// @ts-ignore
-import Pagination from "../../general-components/pagination.component.tsx";
 
-let i = 0;
+import LoadingSpinner from "general-components/spinner.component.tsx";
+
+import Pagination from "general-components/pagination.component.tsx";
+
 const PreviuosProfiles = () => {
   const userId = useSelector((state: any) => state.login.id);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +24,7 @@ const PreviuosProfiles = () => {
     };
 
     fetchProfiles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(profiles);

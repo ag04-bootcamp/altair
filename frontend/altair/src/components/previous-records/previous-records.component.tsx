@@ -1,14 +1,11 @@
-import "./previous-records.styles.scss";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-// @ts-ignore
-import Card from "../../general-components/card.component.tsx";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-// @ts-ignore
-import LoadingSpinner from "../../general-components/spinner.component.tsx";
+import Card from "general-components/card.component.tsx";
+import LoadingSpinner from "general-components/spinner.component.tsx";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import "./previous-records.styles.scss";
 
-let i = 0;
 const PreviousRecords = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [records, setRecords] = useState([]);
@@ -21,13 +18,11 @@ const PreviousRecords = () => {
   };
 
   useEffect(() => {
-    i++;
     const fetchRecords = async () => {
       const response = await axios.get(
         `http://localhost:8080/health/${userId}/records`
       );
 
-      console.log("I RUN ONCE");
       setRecords(response.data);
 
       if ((response.statusText = "OK")) {
@@ -36,6 +31,7 @@ const PreviousRecords = () => {
     };
 
     fetchRecords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [records]);
 
   return (
