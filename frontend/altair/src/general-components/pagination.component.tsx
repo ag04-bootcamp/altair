@@ -48,7 +48,7 @@ const Pagination = (props) => {
         pageCount={pageCount}
         previousLabel="< Previous"
         renderOnZeroPageCount={null}
-        containerClassName="pagination"
+        containerClassName="pagination margins"
         pageLinkClassName="page-num"
         previousLinkClassName="previous-link"
         nextLinkClassName="next-link"

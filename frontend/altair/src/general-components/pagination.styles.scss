@@ -1,22 +1,19 @@
 .pagination {
-  height: 2rem;
   list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
-  padding: 1rem;
-  gap: 1rem;
-  color: #0d2913;
+  color: hwb(133 5% 84%);
+  margin-top: 2rem;
 
-  //position
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  margin-bottom: 10rem;
-  bottom: 0;
+  // //position
+  // position: absolute;
+  // margin-left: auto;
+  // margin-right: auto;
+  // left: 0;
+  // right: 0;
+  // margin-bottom: 10rem;
+  // bottom: 0;
 
   .previous-link {
     padding: 1rem;
@@ -53,4 +50,8 @@
       background-color: #80b98b;
     }
   }
+}
+
+.margins {
+  padding-top: auto;
 }

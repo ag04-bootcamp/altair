@@ -66,8 +66,20 @@ const HealthRecord = () => {
         date: birthDate,
       };
 
-      
-      
+      const response = async () => {
+        const response = await axios.post(
+          "http://localhost:8080/health/record",
+          data
+        );
+
+        try {
+          if (response.statusText === "OK") {
+            navigate("/");
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
     }
   };
 
