@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
-const initialState = []
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = [];
 
 export const filesSlice = createSlice({
-  name: 'files',
+  name: "files",
   initialState: initialState,
   reducers: {
     // increment: state => {
@@ -18,13 +18,13 @@ export const filesSlice = createSlice({
     // incrementByAmount: (state, action) => {
     //   state.value += action.payload
     // }
-    setFiles: (state, action) =>{
-        return [...action.payload]
-    }
-  }
-})
+    setFiles: (state, action) => {
+      return [...action.payload];
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { setFiles } = filesSlice.actions
+export const { setFiles } = filesSlice.actions;
 
-export default filesSlice.reducer
+export default filesSlice.reducer;

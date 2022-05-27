@@ -1,7 +1,13 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: (auto-fill, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+
+
+  .card-img {
+    width: 100%;
+  }
 }
 
 .startColor {

@@ -42,7 +42,7 @@ const App = () => {
           {isLoggedIn && (
             <Route path="/health-record" element={<HealthRecord />} />
           )}
-          {<Route path="/files/*" element={<Files />}/>}
+          {isLoggedIn && <Route path="/files/*" element={<Files />} />}
           {isLoggedIn && (
             <Route path="/all-records" element={<PreviousRecords />} />
           )}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import img from "../../assets/measurement-min.png";
 import Card from "general-components/card.component.tsx";
 import LoadingSpinner from "general-components/spinner.component.tsx";
 import { useEffect, useState } from "react";
@@ -23,16 +24,17 @@ const PreviousRecords = () => {
         `http://localhost:8080/health/${userId}/records`
       );
 
-      setRecords(response.data);
+      console.log(response.data);
 
       if ((response.statusText = "OK")) {
         setIsLoading(false);
+        setRecords(response.data);
       }
     };
 
     fetchRecords();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [records]);
+  }, []);
 
   return (
     <div>
@@ -55,11 +57,12 @@ const PreviousRecords = () => {
           </div>
         )}
 
-        {!isLoading &&
-          records.map((record) => {
-            return (
-              <div className="grid">
+        {!isLoading && (
+          <div className="grid">
+            {records.map((record) => {
+              return (
                 <Card>
+                  <img className="card-img" src={img} alt="measurements" />
                   <h2>
                     {
                       <svg
@@ -115,12 +118,13 @@ const PreviousRecords = () => {
                         />
                       </svg>
                     }
-                    Date: {record.date[2]}.{record.date[1]}.{record.date[0]}.
+                    Date: {record.date}
                   </h2>
                 </Card>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        )}
       </>
     </div>
   );

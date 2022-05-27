@@ -23,6 +23,7 @@ open class SecurityConfiguration {
                 //authorize("/**", hasAuthority("ROLE_USER"))
             }
             formLogin {
+                this@http.csrf { disable() }
                 loginPage = "/login"
             }
         }

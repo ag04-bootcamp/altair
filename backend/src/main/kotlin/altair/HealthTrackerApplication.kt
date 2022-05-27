@@ -25,7 +25,6 @@ fun normalizeArgs(args: Array<String>): Map<String, String>{
         return argsMap
 }
 @Configuration
-@EnableWebFlux
 open class CorsGlobalConfiguration : WebFluxConfigurer {
         override fun addCorsMappings(corsRegistry: CorsRegistry) {
                 corsRegistry.addMapping("/**")

@@ -31,11 +31,20 @@
   .nav-container {
     display: flex;
     justify-content: space-between;
+    position: relative;
+    transition: all 0.4s ease;
+
+    .img-container {
+      width: 4rem;
+      padding-right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     a:link {
       height: 100%;
       padding: 0.9rem 1rem;
-      transition: all 0.4s ease;
 
       &:hover {
         background-color: #2b8a3e;
@@ -45,6 +54,60 @@
       &:active,
       &:focus {
         background-color: #2b8a3e;
+      }
+    }
+
+    .nav-profile-pic {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      align-self: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .menu {
+      height: 10rem;
+      width: 16rem;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #95c59f;
+      border: 2px solid #2b8a3e;
+      border-top: none;
+      z-index: 1000;
+      padding-right: 0;
+      transition: all 0.4s ease;
+      overflow: hidden;
+
+      .welcome {
+        text-align: center;
+        padding: 1rem;
+
+        .userName {
+          color: #fff;
+          font-size: 1.4rem;
+        }
+      }
+
+      a:link,
+      a:visited {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        color: #fff;
+        border-top: 1px solid #2b8a3e;
+        transition: all 0.4s ease;
+
+        &:first-child {
+          border-top: #95c59f;
+        }
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }

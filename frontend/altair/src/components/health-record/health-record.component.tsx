@@ -7,7 +7,6 @@ import Select from "react-select";
 import { add } from "redux/measurements.ts";
 import "./health-record.styles.scss";
 
-
 let i = 0;
 
 const HealthRecord = () => {
@@ -25,8 +24,7 @@ const HealthRecord = () => {
   const userId = useSelector((state: any) => state.login.id);
 
   useEffect(() => {
-    if (i === 0) {
-      i++;
+    {
       const fetchData = async () => {
         const response = await axios.get(
           "http://localhost:8080/measurement/all"
@@ -34,10 +32,11 @@ const HealthRecord = () => {
 
         console.log(response.data);
 
-        response.data?.forEach((measurement) => {
-          dispatch(add(measurement.name));
-        });
+        if (response.statusText === "OK") {
+          dispatch(add(response.data));
+        }
       };
+      console.log(options1);
 
       fetchData();
     }
@@ -45,7 +44,7 @@ const HealthRecord = () => {
   }, []);
 
   const selectoptions = options1.map((option) => {
-    return { value: option, label: option };
+    return { value: option.name, label: option.name };
   });
 
   const onChangeDate = (event) => {
@@ -61,22 +60,22 @@ const HealthRecord = () => {
 
     if (userId !== null && measurement !== null && value !== null) {
       const data = {
-        userId,
+        profileId: userId,
         measurementName: measurement,
         value,
         date: birthDate,
       };
 
-      axios.post(
-        "http://localhost:8080/health/record",
-        data
-      ).then((response) => {
-        if (response.statusText === "OK") {
-          navigate("/");
-        }
-      }).catch((error) => {
-        alert(error.message);
-      })
+      axios
+        .post("http://localhost:8080/health/record", data)
+        .then((response) => {
+          if (response.statusText === "OK") {
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     }
   };
 
