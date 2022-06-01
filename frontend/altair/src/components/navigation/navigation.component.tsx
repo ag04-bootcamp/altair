@@ -2,26 +2,53 @@ import { default as Logo } from "assets/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { logOut } from "redux/login.ts";
+import { logOut, setProfilePicture } from "redux/login.ts";
 import "animate.css";
 import image from "assets/profile.jpg";
 import "./navigation.styles.scss";
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import axios from "axios";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const [uploadedPic, setUploadedPic] = useState(null);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: any) => state.login.isLoggedIn);
+
+  const navigate = useNavigate();
+
+  const userId = useSelector((state: any) => state.login.id);
+  let profilePic = useSelector((state: any) => state.login.profilePicture);
 
   useEffect(() => {
-    console.log("Location changed");
+    if (isLoggedIn) {
+      const getProfilePic = async () => {
+        let res = await axios.get(
+          `http://localhost:8080/file/${userId}/profile`
+        );
+        console.log(res.data);
+
+        if (res.statusText === "OK") {
+          setUploadedPic(res.data[0]);
+          return dispatch(setProfilePicture(uploadedPic));
+        }
+        if (res.statusText !== "OK") {
+          return dispatch(setProfilePicture(image));
+        }
+      };
+
+      getProfilePic();
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
     setMenuOpen(false);
   }, [location]);
 
   const openOnClick = () => {
     setMenuOpen(!menuOpen);
-    console.log(menuOpen);
   };
 
   ////////////////////////////////////////////////////////////////
@@ -30,11 +57,6 @@ const Navigation = () => {
   const [menuClasses, setMenuClasses] = useState("d-none");
 
   /////////////////////////////////////////////////////////////7
-
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: any) => state.login.isLoggedIn);
-
-  const navigate = useNavigate();
 
   const logoHandler = () => {
     navigate("/");
@@ -70,7 +92,11 @@ const Navigation = () => {
           <>
             <div onClick={openOnClick} className="img-container">
               <img
-                src={image}
+                src={
+                  profilePic
+                    ? `http://localhost:8080/file/${userId}/profile/${profilePic.name}`
+                    : image
+                }
                 alt="profile picture"
                 className="nav-profile-pic"
               />
@@ -80,8 +106,8 @@ const Navigation = () => {
               in={menuOpen}
               timeout={800}
               classNames={{
-                enterActive: "animate__fadeInUp",
-                exitActive: "animate__fadeOutDown",
+                enterActive: "animate__fadeInRight",
+                exitActive: "animate__fadeOutRight",
               }}
               unmountOnExit
               className={`animate__animated menu  my-4 ${menuClasses}`}
@@ -97,6 +123,9 @@ const Navigation = () => {
                     Profile
                   </Link>
                 )}
+
+                {isLoggedIn && <Link to="/health-record">Health Record</Link>}
+
                 {isLoggedIn && (
                   <Link onClick={logoutHandler} to="/">
                     Logout
@@ -106,10 +135,6 @@ const Navigation = () => {
             </CSSTransition>
           </>
         )}
-
-        {/* <Link className="last" to="/contact">
-          Contact
-        </Link> */}
       </div>
     </nav>
   );

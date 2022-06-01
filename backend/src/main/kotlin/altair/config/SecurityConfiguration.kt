@@ -8,8 +8,11 @@ import org.springframework.security.core.userdetails.MapReactiveUserDetailsServi
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.web.bind.annotation.CrossOrigin
+import java.lang.Compiler.disable
 
 @EnableWebFluxSecurity
+@CrossOrigin(origins = ["*"])
 open class SecurityConfiguration {
 
     @Bean
@@ -31,6 +34,7 @@ open class SecurityConfiguration {
 
     @Bean
     open fun userDetailsService(): ReactiveUserDetailsService {
+
         val userDetails = User.withDefaultPasswordEncoder()
             .username("user")
             .password("password")

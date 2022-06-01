@@ -1,19 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./profile.styles.scss";
 import DatePicker from "react-date-picker";
-import { useSelector } from "react-redux";
+import UploadModal from "components/upload-modal/upload.component";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { setFullName } from "redux/login";
+import { profile } from "console";
+import image from "../../assets/profile.jpg";
 
 const Profile = () => {
   const [observation, setObservation] = useState("");
+  const [profiles, setProfiles] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [date, setDate] = useState(new Date());
   const [formatedDate, setFormatedDate] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const userId = useSelector((state: any) => state.login.id);
+  const fullName = useSelector((state: any) => state.login.fullName);
+
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const profileResponse = await axios.get(
+        `http://localhost:8080/profile/user?userId=${userId}`
+      );
+      if (profileResponse.statusText === "OK") {
+        setProfiles(profileResponse.data);
+      }
+
+      const userResponse = await axios.get(
+        `http://localhost:8080/users/${userId}`
+      );
+      if (userResponse.statusText === "OK") {
+        const data = userResponse.data;
+        const fullName = `${data.firstName} ${data.lastName}`;
+        dispatch(setFullName(fullName));
+      }
+    };
+
+    fetchProfiles();
+  }, []);
+
+  let correctProfile;
+  if (fullName !== null) {
+    console.log(fullName);
+  }
+
+  const profilePicHandler = (event) => {
+    event.preventDefault();
+    setOpenModal(!openModal);
+  };
+
+  const getDataFromModal = (dataFromModal) => {
+    setOpenModal(dataFromModal);
+  };
 
   const heightHandler = (event) => {
     setHeight(event.target.value);
@@ -67,7 +111,28 @@ const Profile = () => {
 
   return (
     <form onSubmit={submitHandler}>
+      {openModal && (
+        <UploadModal func={getDataFromModal} onOpenModal={openModal} />
+      )}
+
       <h2>Profile</h2>
+
+      {fullName && (
+        <div className="profile-data">
+          <div className="picture-name">
+            <img
+              src={image}
+              className="profile-pic"
+              alt="default profile picture"
+            />
+            <h4 className="fullname">{fullName}</h4>
+          </div>
+
+          <button onClick={profilePicHandler} className="picture-btn">
+            Change Photo
+          </button>
+        </div>
+      )}
 
       <div className="profile-flex">
         <div>
@@ -80,8 +145,6 @@ const Profile = () => {
           <input onChange={weightHandler} required id="weight" type="number" />
         </div>
       </div>
-      <label htmlFor="date">Date</label>
-      <DatePicker className="date" value={date} onChange={onChangeDate} />
 
       <label htmlFor="observation">Personal Observation</label>
       <textarea
@@ -91,6 +154,9 @@ const Profile = () => {
         className="observation-input"
         rows={5}
       ></textarea>
+
+      <label htmlFor="date">Date</label>
+      <DatePicker className="date" value={date} onChange={onChangeDate} />
       <button onClick={previousProfilesHandler} className="previous-profiles">
         Previous Profiles
       </button>

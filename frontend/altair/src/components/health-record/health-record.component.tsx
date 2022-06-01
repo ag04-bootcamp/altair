@@ -87,6 +87,10 @@ const HealthRecord = () => {
     navigate("/measurement");
   };
 
+  const previousRecordsHandler = () => {
+    navigate("/all-records");
+  };
+
   const cancelHandler = () => {
     navigate("/");
   };
@@ -137,10 +141,14 @@ const HealthRecord = () => {
             onChange={onChangeDate}
           />
         </div>
+
+        <button onClick={previousRecordsHandler} className="prev-records">
+          Previous Records
+        </button>
       </div>
 
       <button className="start signBtn">Submit record</button>
-      <button onClick={cancelHandler} className="cancel">
+      <button onClick={cancelHandler} className="cancel ">
         Cancel
       </button>
     </form>
