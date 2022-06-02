@@ -25,9 +25,9 @@ body {
     rgba(226, 255, 233, 1) 100%
   );
 
-  min-height: 100vh;
-  padding-bottom: 4rem;
-  overflow: hidden;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100%;
 }
 
 form {
