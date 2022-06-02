@@ -2,9 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setProfilePicture } from "redux/login";
 import { logIn, setName } from "redux/login.ts";
 import "./login-form.styles.scss";
-
 
 const LoginForm = () => {
   const [userName, setUserName] = useState("");
@@ -44,6 +44,12 @@ const LoginForm = () => {
         alert("Wrong password! Please try again.");
         return;
       }
+
+      const profilePic = await axios.get(
+        `http://localhost:8080/file/${correctUser[0].id}/profile`
+      );
+      dispatch(setProfilePicture(profilePic.data[0]));
+      console.log(profilePic.data[0]);
 
       if (correctUser[0].password === password) {
         dispatch(logIn(correctUser[0].id));

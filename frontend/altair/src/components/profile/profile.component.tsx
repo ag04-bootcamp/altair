@@ -5,7 +5,7 @@ import DatePicker from "react-date-picker";
 import UploadModal from "components/upload-modal/upload.component";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { setFullName } from "redux/login";
+import { setFullName, setProfilePicture } from "redux/login";
 import { profile } from "console";
 import image from "../../assets/profile.jpg";
 
@@ -22,6 +22,9 @@ const Profile = () => {
 
   const userId = useSelector((state: any) => state.login.id);
   const fullName = useSelector((state: any) => state.login.fullName);
+
+  let profilePic = useSelector((state: any) => state.login.profilePicture);
+  console.log(profilePic);
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -57,6 +60,13 @@ const Profile = () => {
 
   const getDataFromModal = (dataFromModal) => {
     setOpenModal(dataFromModal);
+  };
+
+  const getNewPicture = (newPicture) => {
+    if (newPicture !== null) {
+      dispatch(setProfilePicture(newPicture));
+      setOpenModal(false);
+    }
   };
 
   const heightHandler = (event) => {
@@ -102,8 +112,6 @@ const Profile = () => {
       };
 
       axios.post("http://localhost:8080/profile", profile);
-
-      console.log(profile);
     } else {
       alert("Please make sure you entered valid data in each field!");
     }
@@ -112,7 +120,11 @@ const Profile = () => {
   return (
     <form onSubmit={submitHandler}>
       {openModal && (
-        <UploadModal func={getDataFromModal} onOpenModal={openModal} />
+        <UploadModal
+          func1={getNewPicture}
+          func={getDataFromModal}
+          onOpenModal={openModal}
+        />
       )}
 
       <h2>Profile</h2>
@@ -121,7 +133,7 @@ const Profile = () => {
         <div className="profile-data">
           <div className="picture-name">
             <img
-              src={image}
+              src={`http://localhost:8080/file/${userId}/profile/${profilePic.name}`}
               className="profile-pic"
               alt="default profile picture"
             />

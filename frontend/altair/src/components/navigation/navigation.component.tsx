@@ -12,7 +12,7 @@ import axios from "axios";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [uploadedPic, setUploadedPic] = useState(null);
+  const [uploadedPic, setUploadedPic] = useState(image);
   const location = useLocation();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: any) => state.login.isLoggedIn);
@@ -20,7 +20,9 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const userId = useSelector((state: any) => state.login.id);
+
   let profilePic = useSelector((state: any) => state.login.profilePicture);
+  console.log(profilePic);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -28,17 +30,13 @@ const Navigation = () => {
         let res = await axios.get(
           `http://localhost:8080/file/${userId}/profile`
         );
-        console.log(res.data);
 
         if (res.statusText === "OK") {
-          setUploadedPic(res.data[0]);
-          return dispatch(setProfilePicture(uploadedPic));
+          await setUploadedPic(res.data[0]);
         }
-        if (res.statusText !== "OK") {
-          return dispatch(setProfilePicture(image));
-        }
-      };
 
+        console.log("aaaaa");
+      };
       getProfilePic();
     }
   }, [isLoggedIn]);
@@ -46,6 +44,10 @@ const Navigation = () => {
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
+
+  // if (uploadedPic !== null) {
+  //   dispatch(setProfilePicture(uploadedPic));
+  // }
 
   const openOnClick = () => {
     setMenuOpen(!menuOpen);
@@ -91,15 +93,21 @@ const Navigation = () => {
         {isLoggedIn && (
           <>
             <div onClick={openOnClick} className="img-container">
-              <img
-                src={
-                  profilePic
-                    ? `http://localhost:8080/file/${userId}/profile/${profilePic.name}`
-                    : image
-                }
-                alt="profile picture"
-                className="nav-profile-pic"
-              />
+              {profilePic && (
+                <img
+                  src={`http://localhost:8080/file/${userId}/profile/${profilePic.name}`}
+                  alt="profile picture"
+                  className="nav-profile-pic"
+                />
+              )}
+
+              {!profilePic && (
+                <img
+                  src={image}
+                  alt="profile picture"
+                  className="nav-profile-pic"
+                />
+              )}
             </div>
 
             <CSSTransition

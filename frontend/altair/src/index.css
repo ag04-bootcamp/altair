@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
@@ -17,8 +24,9 @@ body {
     rgba(255, 255, 255, 1) 49%,
     rgba(226, 255, 233, 1) 100%
   );
-  position: relative;
+
   min-height: 100vh;
+  padding-bottom: 4rem;
   overflow: hidden;
 }
 
