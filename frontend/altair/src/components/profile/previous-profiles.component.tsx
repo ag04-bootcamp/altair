@@ -2,6 +2,7 @@ import "./previous-profiles.styles.scss";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import image from "assets/profile.jpg";
 
 import LoadingSpinner from "general-components/spinner.component.tsx";
 
@@ -11,6 +12,13 @@ const PreviuosProfiles = () => {
   const userId = useSelector((state: any) => state.login.id);
   const [isLoading, setIsLoading] = useState(true);
   const [profiles, setProfiles] = useState([]);
+
+  axios({
+    method: "post",
+    url: `http://localhost:8080/file/${userId}/profile`,
+    data: { files: image },
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
   useEffect(() => {
     const fetchProfiles = async () => {

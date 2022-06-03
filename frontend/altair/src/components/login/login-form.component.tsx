@@ -45,12 +45,6 @@ const LoginForm = () => {
         return;
       }
 
-      const profilePic = await axios.get(
-        `http://localhost:8080/file/${correctUser[0].id}/profile`
-      );
-      dispatch(setProfilePicture(profilePic.data[0]));
-      console.log(profilePic.data[0]);
-
       if (correctUser[0].password === password) {
         dispatch(logIn(correctUser[0].id));
         dispatch(setName(userName));

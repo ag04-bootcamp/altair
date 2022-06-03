@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { logIn } from "redux/login.ts";
 import "./sign-up-form.styles.scss";
 
+import image from "assets/profile.jpg";
+import { setProfilePicture } from "redux/login";
 
 const SignUpForm = () => {
-  // const [formatedDate, setFormatedDate] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
   const [birthDate, setBirthDate] = useState(new Date());
   const dispatch = useDispatch();
 
@@ -22,9 +22,6 @@ const SignUpForm = () => {
 
   const onChangeDate = (event) => {
     setBirthDate(event);
-    // const now = new Date(event);
-    // const dateString = `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`;
-    // setFormatedDate(dateString);
   };
 
   const firstNameHandler = (event) => {
@@ -86,6 +83,8 @@ const SignUpForm = () => {
 
           response.data.forEach((user) => {
             if (user.userName === userName) {
+              dispatch(setProfilePicture(image));
+
               dispatch(logIn(user.id));
               navigate("/");
             }

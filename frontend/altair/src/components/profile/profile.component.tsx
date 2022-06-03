@@ -133,7 +133,7 @@ const Profile = () => {
         <div className="profile-data">
           <div className="picture-name">
             <img
-              src={`http://localhost:8080/file/${userId}/profile/${profilePic.name}`}
+              src={profilePic}
               className="profile-pic"
               alt="default profile picture"
             />

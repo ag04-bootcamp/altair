@@ -30,9 +30,18 @@ const Navigation = () => {
         let res = await axios.get(
           `http://localhost:8080/file/${userId}/profile`
         );
+        console.log(res);
 
         if (res.statusText === "OK") {
           await setUploadedPic(res.data[0]);
+          dispatch(
+            setProfilePicture(
+              `http://localhost:8080/file/${userId}/profile/${res.data[0].name}`
+            )
+          );
+        } else {
+          setUploadedPic(image);
+          dispatch(setProfilePicture(image));
         }
 
         console.log("aaaaa");
@@ -87,7 +96,6 @@ const Navigation = () => {
       <div className="nav-container">
         {isLoggedIn && <Link to="/">Home</Link>}
 
-        {<Link to="/files">Files</Link>}
         {!isLoggedIn && <Link to="/login">Login</Link>}
 
         {isLoggedIn && (
@@ -95,7 +103,8 @@ const Navigation = () => {
             <div onClick={openOnClick} className="img-container">
               {profilePic && (
                 <img
-                  src={`http://localhost:8080/file/${userId}/profile/${profilePic.name}`}
+                  // src={`http://localhost:8080/file/${userId}/profile/${profilePic.name}`}
+                  src={profilePic}
                   alt="profile picture"
                   className="nav-profile-pic"
                 />
@@ -133,6 +142,7 @@ const Navigation = () => {
                 )}
 
                 {isLoggedIn && <Link to="/health-record">Health Record</Link>}
+                {<Link to="/files">Files</Link>}
 
                 {isLoggedIn && (
                   <Link onClick={logoutHandler} to="/">

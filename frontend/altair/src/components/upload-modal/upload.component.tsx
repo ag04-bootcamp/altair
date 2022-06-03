@@ -57,13 +57,20 @@ const UploadModal = (props) => {
         `http://localhost:8080/file/${userId}/profile`
       );
 
-      if (getNewPicture.statusText === "OK") {
-        await dispatch(setProfilePicture(getNewPicture.data[0]));
+      console.log(getNewPicture);
 
-        console.log(profilePic);
+      if (getNewPicture.statusText === "OK") {
+        dispatch(
+          setProfilePicture(
+            `http://localhost:8080/file/${userId}/profile/${getNewPicture.data[0].name}`
+          )
+        );
+
         openModal = !openModal;
         props.func(openModal);
-        props.func1(getNewPicture.data[0]);
+        props.func1(
+          `http://localhost:8080/file/${userId}/profile/${getNewPicture.data[0].name}`
+        );
       }
 
       navigate("/");
