@@ -49,11 +49,25 @@ body.active-modal {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s ease;
 
+  .choose-file {
+    transition: all 0.4s ease;
+    color: #2b8a3e;
+
+    &:hover {
+      color: #95c59f;
+    }
+  }
   .upload-icon {
     height: 2rem;
     width: 2rem;
     color: #2b8a3e;
+    transition: all 0.4s ease;
+
+    &:hover {
+      color: #95c59f;
+    }
   }
 
   .upload-input {

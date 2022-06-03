@@ -1,12 +1,15 @@
 import "./pagination.styles.scss";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import Card from "./card.component";
+import { useNavigate } from "react-router-dom";
 
 const Pagination = (props) => {
   const { profiles } = props;
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
+  const navigate = useNavigate();
   const itemsPerPage = 6;
 
   console.log(profiles.length);
@@ -23,8 +26,26 @@ const Pagination = (props) => {
     setItemOffset(newOffset);
   };
 
+  const profileHandler = () => {
+    navigate("/profile");
+  };
+
   return (
     <>
+      {currentItems.length === 0 && (
+        <div className="center-card">
+          <Card>
+            <h2>No previous profiles.</h2>
+            <p>Consider adding new profile</p>
+            <p className="arrow-down">↓</p>
+
+            <button className="startColor start" onClick={profileHandler}>
+              New Profile
+            </button>
+          </Card>
+        </div>
+      )}
+
       <div className="grid-profiles">
         {currentItems.map((profile) => {
           return (
@@ -33,9 +54,7 @@ const Pagination = (props) => {
               <h2>Weight: {profile.weight}</h2>
               <h2>Height: {profile.height}</h2>
               <h2>Personal Observation: {profile.personalObservation}</h2>
-              <h2>
-                Date: {profile.date[2]}.{profile.date[1]}.{profile.date[0]}.
-              </h2>
+              <h2>Date: {profile.date} (YYYY - MM - DD)</h2>
             </div>
           );
         })}

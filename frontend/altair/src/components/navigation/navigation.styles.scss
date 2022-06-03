@@ -75,7 +75,6 @@
       right: 0;
       top: 100%;
       background-color: #95c59f;
-      border: 2px solid #2b8a3e;
       border-top: none;
       z-index: 1000;
       padding-right: 0;
@@ -99,16 +98,21 @@
         justify-content: center;
         width: 100%;
         color: #fff;
-        border-top: 1px solid #2b8a3e;
-        transition: all 0.4s ease;
+        transition: all 0.2s ease;
+        border: 1px solid rgb(207, 207, 207);
 
         &:first-child {
           border-top: #95c59f;
         }
         &:hover {
           color: #fff;
+          background-color: #2b8a3e;
+          font-weight: bold;
         }
       }
+    }
+
+    .logout {
     }
   }
 

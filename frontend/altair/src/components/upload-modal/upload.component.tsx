@@ -109,6 +109,7 @@ const UploadModal = (props) => {
           </svg>
 
           {file && <p className="file-name">{file.name}</p>}
+          {!file && <p className="choose-file">Choose file</p>}
         </label>
 
         <button onClick={uploadPictureHanlder} className="modal-btn save">

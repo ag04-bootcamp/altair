@@ -23,7 +23,6 @@ const Profile = () => {
   const fullName = useSelector((state: any) => state.login.fullName);
 
   let profilePic = useSelector((state: any) => state.login.profilePicture);
-  console.log(profilePic);
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -160,7 +159,8 @@ const Profile = () => {
         name="observation"
         onChange={observationHandler}
         className="observation-input"
-        rows={5}
+        rows={2}
+        maxLength={30}
       ></textarea>
 
       <label htmlFor="date">Date</label>

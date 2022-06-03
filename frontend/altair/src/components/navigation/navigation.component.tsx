@@ -34,8 +34,6 @@ const Navigation = () => {
             }
           });
 
-        console.log(res);
-
         if (res) {
           await setUploadedPic(res.data[0]);
           dispatch(
@@ -51,8 +49,6 @@ const Navigation = () => {
       getProfilePic();
     }
   }, [isLoggedIn, profilePic]);
-
-  console.log(profilePic);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -148,7 +144,7 @@ const Navigation = () => {
                 {<Link to="/files">Files</Link>}
 
                 {isLoggedIn && (
-                  <Link onClick={logoutHandler} to="/">
+                  <Link className="logout" onClick={logoutHandler} to="/">
                     Logout
                   </Link>
                 )}
