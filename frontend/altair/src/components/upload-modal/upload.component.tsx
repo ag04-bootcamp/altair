@@ -31,7 +31,6 @@ const UploadModal = (props) => {
     if (event.target && event.target.files[0]) {
       setFile(event.target.files[0]);
       formData.append("files", event.target.files[0]);
-      console.log("files", event.target.files[0]);
     }
   };
 
@@ -42,9 +41,11 @@ const UploadModal = (props) => {
       const deletePrevious = await axios({
         method: "delete",
         url: `http://localhost:8080/file/${userId}/profile`,
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+        }
       });
-
-      console.log(deletePrevious);
 
       const res = await axios({
         method: "post",
@@ -56,8 +57,6 @@ const UploadModal = (props) => {
       const getNewPicture = await axios.get(
         `http://localhost:8080/file/${userId}/profile`
       );
-
-      console.log(getNewPicture);
 
       if (getNewPicture.statusText === "OK") {
         dispatch(

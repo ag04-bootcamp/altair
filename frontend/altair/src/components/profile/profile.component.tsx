@@ -6,7 +6,6 @@ import UploadModal from "components/upload-modal/upload.component";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { setFullName, setProfilePicture } from "redux/login";
-import { profile } from "console";
 import image from "../../assets/profile.jpg";
 
 const Profile = () => {
@@ -50,7 +49,6 @@ const Profile = () => {
 
   let correctProfile;
   if (fullName !== null) {
-    console.log(fullName);
   }
 
   const profilePicHandler = (event) => {
@@ -71,7 +69,6 @@ const Profile = () => {
 
   const heightHandler = (event) => {
     setHeight(event.target.value);
-    console.log(height);
   };
 
   const weightHandler = (event) => {
@@ -96,7 +93,6 @@ const Profile = () => {
     const now = new Date(event);
     const dateString = `${now.getDate()}.${now.getMonth()}.${now.getFullYear()}`;
     setFormatedDate(dateString);
-    console.log(formatedDate);
   };
 
   const submitHandler = (event) => {

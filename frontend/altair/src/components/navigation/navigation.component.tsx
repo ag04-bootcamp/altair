@@ -22,17 +22,21 @@ const Navigation = () => {
   const userId = useSelector((state: any) => state.login.id);
 
   let profilePic = useSelector((state: any) => state.login.profilePicture);
-  console.log(profilePic);
 
   useEffect(() => {
     if (isLoggedIn) {
       const getProfilePic = async () => {
-        let res = await axios.get(
-          `http://localhost:8080/file/${userId}/profile`
-        );
+        let res = await axios
+          .get(`http://localhost:8080/file/${userId}/profile`)
+          .catch((error) => {
+            if (error.response) {
+              console.log(error.response.data);
+            }
+          });
+
         console.log(res);
 
-        if (res.statusText === "OK") {
+        if (res) {
           await setUploadedPic(res.data[0]);
           dispatch(
             setProfilePicture(
@@ -43,12 +47,12 @@ const Navigation = () => {
           setUploadedPic(image);
           dispatch(setProfilePicture(image));
         }
-
-        console.log("aaaaa");
       };
       getProfilePic();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, profilePic]);
+
+  console.log(profilePic);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -78,7 +82,6 @@ const Navigation = () => {
     dispatch(logOut());
 
     navigate("/");
-    console.log(isLoggedIn);
   };
 
   return (

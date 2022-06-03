@@ -24,11 +24,6 @@ const LoginForm = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
-    // const data = {
-    //   userName,
-    //   password,
-    // };
   };
 
   const loginHandler = async (event) => {

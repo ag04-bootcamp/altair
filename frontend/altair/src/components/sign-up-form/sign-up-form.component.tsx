@@ -75,11 +75,9 @@ const SignUpForm = () => {
     } else {
       const users = async () => {
         const postUser = await axios.post("http://localhost:8080/users", data);
-        console.log(postUser);
 
         if (postUser.statusText === "OK") {
           const response = await axios.get("http://localhost:8080/users");
-          console.log(response.data);
 
           response.data.forEach((user) => {
             if (user.userName === userName) {

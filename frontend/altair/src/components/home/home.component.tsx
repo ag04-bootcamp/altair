@@ -38,8 +38,6 @@ const Home = () => {
     navigate("/all-records");
   };
 
-  console.log(profilePic);
-
   return (
     <div className="hero">
       <div className="heading-container">
