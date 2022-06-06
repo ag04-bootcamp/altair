@@ -9,11 +9,11 @@ import Footer from "./general-components/footer.component.tsx";
 import LoginForm from "./components/login/login-form.component.tsx";
 import SignUpForm from "./components/sign-up-form/sign-up-form.component.tsx";
 import HealthRecord from "./components/health-record/health-record.component.tsx";
-import Contact from "./components/contact/contact.component.tsx";
 import Measurement from "./components/measurement/measurement.component.tsx";
 import PreviousRecords from "./components/previous-records/previous-records.component.tsx";
 import Files from "./components/files/files.component.tsx";
 import PreviuosProfiles from "./components/profile/previous-profiles.component.tsx";
+import AboutUs from "./components/about-us/about-us.component.tsx";
 
 import { useSelector } from "react-redux";
 
@@ -43,10 +43,10 @@ const App = () => {
             <Route path="/health-record" element={<HealthRecord />} />
           )}
           {isLoggedIn && <Route path="/files/*" element={<Files />} />}
+          <Route path="/about-us" element={<AboutUs />} />
           {isLoggedIn && (
             <Route path="/all-records" element={<PreviousRecords />} />
           )}
-          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </Container>

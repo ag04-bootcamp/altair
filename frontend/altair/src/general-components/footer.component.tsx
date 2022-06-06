@@ -41,8 +41,8 @@ const Footer = () => {
       </div>
 
       <div>
-        <Link to="/contact" className="copyright contact-link">
-          Contact
+        <Link to="/about-us" className="copyright contact-link">
+          About Us
         </Link>
       </div>
     </footer>
