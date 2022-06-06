@@ -133,12 +133,25 @@ const AboutUs = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.560739486742!2d16.444631115783892!3d43.51149826959957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13355e05c24cf505%3A0x44eda39698f175ce!2sUl.%20Georgea%20Washingtona%2022%2C%2021000%2C%20Split!5e0!3m2!1sen!2shr!4v1654517694900!5m2!1sen!2shr"
             width="600"
             height="450"
-            style={{ border: "0", width: "40%", borderRadius: "9px" }}
+            style={{ border: "0", width: "100%", borderRadius: "9px" }}
             allowFullScreen={false}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="map"
           ></iframe>
+        </div>
+        <div className="address">
+          <h2>Address</h2>
+          <a href="https://www.google.com/maps?ll=43.512422,16.447466&z=16&t=m&hl=en&gl=HR&mapclient=embed&q=Ul.+Georgea+Washingtona+22+21000,+Split">
+            Ulica Georgea Washingtona 22, 21000 Split
+          </a>
+
+          <h2 className="margin-top">Working hours:</h2>
+          <p className="work-hours">Mon - Fri : 06:00h - 20:00h</p>
+
+          <h2 className="margin-top">Contact number:</h2>
+          <p className="work-hours">Telephone: 00385 21 776 154</p>
+          <p className="work-hours">Cellphone: 00385 95 112 7261</p>
         </div>
       </div>
     </>
