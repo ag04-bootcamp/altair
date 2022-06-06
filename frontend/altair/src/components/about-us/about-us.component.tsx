@@ -81,10 +81,6 @@ const AboutUs = () => {
         <img className="icon" src={healthIcon} alt="Heart with weight scale" />
       </div>
 
-      <div className="location">
-        <h2>Where to find us</h2>
-      </div>
-
       <div className="contact">
         <div className="content-grid">
           <div className="center-content-grid">
@@ -127,6 +123,22 @@ const AboutUs = () => {
             </div>
           </div>
           <img src={envelope} alt="green envelope" className="envelope" />
+        </div>
+      </div>
+
+      <div className="location">
+        <div className="location-flex">
+          <h2>Where to find us</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.560739486742!2d16.444631115783892!3d43.51149826959957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13355e05c24cf505%3A0x44eda39698f175ce!2sUl.%20Georgea%20Washingtona%2022%2C%2021000%2C%20Split!5e0!3m2!1sen!2shr!4v1654517694900!5m2!1sen!2shr"
+            width="600"
+            height="450"
+            style={{ border: "0", width: "40%", borderRadius: "9px" }}
+            allowFullScreen={false}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="map"
+          ></iframe>
         </div>
       </div>
     </>
