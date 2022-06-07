@@ -142,7 +142,10 @@ const AboutUs = () => {
         </div>
         <div className="address">
           <h2>Address</h2>
-          <a href="https://www.google.com/maps?ll=43.512422,16.447466&z=16&t=m&hl=en&gl=HR&mapclient=embed&q=Ul.+Georgea+Washingtona+22+21000,+Split">
+          <a
+            href="https://www.google.com/maps?ll=43.512422,16.447466&z=16&t=m&hl=en&gl=HR&mapclient=embed&q=Ul.+Georgea+Washingtona+22+21000,+Split"
+            target="blank"
+          >
             Ulica Georgea Washingtona 22, 21000 Split
           </a>
 
@@ -152,6 +155,7 @@ const AboutUs = () => {
           <h2 className="margin-top">Contact number:</h2>
           <p className="work-hours">Telephone: 00385 21 776 154</p>
           <p className="work-hours">Cellphone: 00385 95 112 7261</p>
+          <p className="work-hours">Email: info-altair@gmail.com</p>
         </div>
       </div>
     </>

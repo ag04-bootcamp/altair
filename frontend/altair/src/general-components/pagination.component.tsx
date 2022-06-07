@@ -54,7 +54,7 @@ const Pagination = (props) => {
               <h2>Weight: {profile.weight}</h2>
               <h2>Height: {profile.height}</h2>
               <h2>Personal Observation: {profile.personalObservation}</h2>
-              <h2>Date: {profile.date} (YYYY - MM - DD)</h2>
+              <h2>Date: {profile.date} </h2>
             </div>
           );
         })}
