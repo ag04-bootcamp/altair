@@ -1,7 +1,7 @@
 import "./health-pagination.styles.scss";
 
 import img from "../../assets/measurement-min.png";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Card from "general-components/card.component";
 import { useNavigate } from "react-router-dom";
