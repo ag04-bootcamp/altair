@@ -25,22 +25,14 @@ const Footer = () => {
         <TwitterLogo onClick={twitterHandler} className="social-icons" />
         <InstagramLogo onClick={instagramHandler} className="social-icons" />
       </div>
-      <div>
+      <div className="copyright-div">
         <p className="copyright">
           Ⓒ {year} Ana Malinar, Karlo Maros and Ante Latinčić. All rights
           reserved.
         </p>
       </div>
-      <div className="copyright">
-        <a
-          target="#"
-          href="https://www.google.com/maps/place/300+Hidden+Figures+Way,+Washington,+DC+20024,+USA/data=!4m2!3m1!1s0x89b7b778ab8e734b:0x6bbb01abe0946b44?sa=X&ved=2ahUKEwi6l4yu-dv3AhUySPEDHUhsAboQ8gF6BAgWEAE"
-        >
-          300 Hidden Figures Way SW Washington D.C., USA
-        </a>
-      </div>
 
-      <div>
+      <div className="about">
         <Link to="/about-us" className="copyright contact-link">
           About Us
         </Link>

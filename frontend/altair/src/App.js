@@ -14,6 +14,7 @@ import PreviousRecords from "./components/previous-records/previous-records.comp
 import Files from "./components/files/files.component.tsx";
 import PreviuosProfiles from "./components/profile/previous-profiles.component.tsx";
 import AboutUs from "./components/about-us/about-us.component.tsx";
+import UpdateProfile from "./components/update-profile/update-profile.component.tsx";
 
 import { useSelector } from "react-redux";
 
@@ -38,6 +39,9 @@ const App = () => {
             />
           )}
           {!isLoggedIn && <Route path="/login" element={<LoginForm />} />}
+          {isLoggedIn && (
+            <Route path="/update-profile" element={<UpdateProfile />} />
+          )}
           {!isLoggedIn && <Route path="/sign-up" element={<SignUpForm />} />}
           {isLoggedIn && (
             <Route path="/health-record" element={<HealthRecord />} />

@@ -6,7 +6,6 @@ import UploadModal from "components/upload-modal/upload.component";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { setFullName, setProfilePicture } from "redux/login";
-import image from "../../assets/profile.jpg";
 
 const Profile = () => {
   const [observation, setObservation] = useState("");
@@ -53,6 +52,10 @@ const Profile = () => {
   const profilePicHandler = (event) => {
     event.preventDefault();
     setOpenModal(!openModal);
+  };
+
+  const updateInfoHandler = () => {
+    navigate("/update-profile");
   };
 
   const getDataFromModal = (dataFromModal) => {
@@ -125,20 +128,27 @@ const Profile = () => {
       <h2>Profile</h2>
 
       {fullName && (
-        <div className="profile-data">
-          <div className="picture-name">
-            <img
-              src={profilePic}
-              className="profile-pic"
-              alt="default profile picture"
-            />
-            <h4 className="fullname">{fullName}</h4>
-          </div>
+        <>
+          <div className="profile-data">
+            <div className="picture-name">
+              <img
+                src={profilePic}
+                className="profile-pic"
+                alt="default profile picture"
+              />
+              <h4 className="fullname">{fullName}</h4>
+            </div>
 
-          <button onClick={profilePicHandler} className="picture-btn">
-            Change Photo
-          </button>
-        </div>
+            <button onClick={profilePicHandler} className="picture-btn">
+              Change Photo
+            </button>
+          </div>
+          <div className="info-container">
+            <button onClick={updateInfoHandler} className="info-btn">
+              Update Personal Info
+            </button>
+          </div>
+        </>
       )}
 
       <div className="profile-flex">

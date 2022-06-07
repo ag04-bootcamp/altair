@@ -15,6 +15,8 @@ const UploadModal = (props) => {
 
   let profilePic = useSelector((state: any) => state.login.profilePicture);
 
+  useEffect(() => {}, []);
+
   const toggleModal = (event) => {
     event.preventDefault();
     openModal = !openModal;

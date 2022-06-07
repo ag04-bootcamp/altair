@@ -10,6 +10,7 @@
   .description {
     line-height: 1.5;
     letter-spacing: 0.05rem;
+    color: #666;
   }
 
   .main-title {
@@ -173,8 +174,9 @@
   }
 
   .address {
+    padding-top: 3.5rem;
     h2 {
-      color: #555;
+      color: #777;
       font-weight: normal;
       font-size: 1.5rem;
       margin-bottom: 1rem;
@@ -185,7 +187,7 @@
     }
 
     .work-hours {
-      color: #2b8a3e;
+      color: #777;
     }
 
     a:link,

@@ -26,6 +26,8 @@ body {
 
   position: relative;
   overflow-x: hidden;
+  min-height: 100vh;
+  padding-bottom: 4rem;
 }
 
 form {

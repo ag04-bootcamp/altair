@@ -7,7 +7,7 @@ import "animate.css";
 import image from "assets/profile.jpg";
 import "./navigation.styles.scss";
 
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import axios from "axios";
 
 const Navigation = () => {
@@ -48,15 +48,11 @@ const Navigation = () => {
       };
       getProfilePic();
     }
-  }, [isLoggedIn, profilePic]);
+  }, [isLoggedIn, profilePic, dispatch, userId]);
 
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
-
-  // if (uploadedPic !== null) {
-  //   dispatch(setProfilePicture(uploadedPic));
-  // }
 
   const openOnClick = () => {
     setMenuOpen(!menuOpen);
@@ -104,7 +100,7 @@ const Navigation = () => {
                 <img
                   // src={`http://localhost:8080/file/${userId}/profile/${profilePic.name}`}
                   src={profilePic}
-                  alt="profile picture"
+                  alt="profile pic "
                   className="nav-profile-pic"
                 />
               )}
@@ -112,7 +108,7 @@ const Navigation = () => {
               {!profilePic && (
                 <img
                   src={image}
-                  alt="profile picture"
+                  alt="profile pic"
                   className="nav-profile-pic"
                 />
               )}
