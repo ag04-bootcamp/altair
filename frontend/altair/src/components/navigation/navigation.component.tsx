@@ -137,7 +137,7 @@ const Navigation = () => {
                 )}
 
                 {isLoggedIn && <Link to="/health-record">Health Record</Link>}
-                {<Link to="/files">Files</Link>}
+                {<Link to={`/files/${userId}`}>Files</Link>}
 
                 {isLoggedIn && (
                   <Link className="logout" onClick={logoutHandler} to="/">

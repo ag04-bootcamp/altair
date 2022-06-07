@@ -11,6 +11,7 @@ import org.springframework.util.FileSystemUtils
 import reactor.core.publisher.Mono
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.nio.file.Files
 import javax.annotation.PostConstruct
 import kotlin.io.path.Path
 
@@ -105,8 +106,15 @@ class FileService {
         val filesInDir = file.listFiles()
         val files = mutableListOf<FileModel>()
         for (f in filesInDir!!) {
-            if (f.isFile) files.add(FileModel(true, f.name, "${path.buildPath()}/${f.name}"))
-            else files.add(FileModel(false, f.name, "${path.buildPath()}/${f.name}"))
+            if (f.isFile) {
+                var isImage = false
+                val mimeType = Files.probeContentType(Path(f.absolutePath)).split("/")[0]
+                if(mimeType == "image") {
+                    isImage = true
+                }
+                files.add(FileModel(true, f.name, "${path.buildPath()}/${f.name}", isImage = isImage))
+            }
+            else files.add(FileModel(false, f.name, "${path.buildPath()}/${f.name}", false))
         }
         val out = ByteArrayOutputStream()
         val mapper = ObjectMapper()
