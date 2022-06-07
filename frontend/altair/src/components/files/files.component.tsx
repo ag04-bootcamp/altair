@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { setFiles } from 'redux/files.ts';
+import Breadcrumbs from 'general-components/breadcrumbs.component';
 import File from "./file.component.tsx";
 import "./files.styles.scss";
 type FileModel = {
@@ -18,11 +19,11 @@ const Files = () => {
 
     const files: Array<FileModel> = useSelector((state: any) => state.files)
     var path = useParams()["*"]
-    
+
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        getFiles(path).then((res)=>{
+    useEffect(() => {
+        getFiles(path).then((res) => {
             dispatch(setFiles(res.data))
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,8 +31,16 @@ const Files = () => {
 
     return (
         <div>
-            <div>
-                files - karlo - random
+            <div className='files-header'>
+                <Breadcrumbs path={path.split("/")
+                    .map((el: any, index) => {
+                        return { path: el, displayName: index === 0 ? "ROOT" : el }
+                    })
+                } />
+                <div>
+                    <button>create Folder</button>
+                    <button>upload</button>
+                </div>
             </div>
             <div className="files files-container">
                 {files.map((file) => {
