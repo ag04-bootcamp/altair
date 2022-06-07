@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from 'redux-persist';
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
   isLoggedIn: false,
@@ -49,4 +51,10 @@ export const {
   setProfilePicture,
 } = loginSlice.actions;
 
-export default loginSlice.reducer;
+
+const persistConfig = {
+  key: 'persistKey',
+  storage
+}
+
+export default persistReducer(persistConfig, loginSlice.reducer);
