@@ -21,20 +21,21 @@ const HealthRecord = () => {
   let options1 = useSelector((state: any) => state.measurement.options);
   console.log(options1);
 
+  let selectOptions = [];
+
   const userId = useSelector((state: any) => state.login.id);
 
   useEffect(() => {
-    {
+    if (i === 0) {
+      i++;
       const fetchData = async () => {
         const response = await axios.get(
           "http://localhost:8080/measurement/all"
         );
 
-        console.log(response.data);
-
         if (response.statusText === "OK") {
           response.data.map((res) => {
-            return dispatch(add(res.name));
+            dispatch(add(res.name));
           });
         }
         console.log(options1);
@@ -42,15 +43,14 @@ const HealthRecord = () => {
 
       fetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options1]);
 
-  let selectOptions = [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (options1.length > 0) {
     selectOptions = options1.map((option) => {
       console.log(option);
-      return { value: option.name, label: option.name };
+      return { value: option, label: option };
     });
   }
 

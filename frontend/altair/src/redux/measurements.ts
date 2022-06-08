@@ -8,8 +8,8 @@ export const measurementSlice = createSlice({
   name: "measurement",
   initialState,
   reducers: {
-    add: (state: any, action) => {
-      state.options3 = action.payload;
+    add: (state: any, { payload }) => {
+      state = state.options.push(payload);
       // state = state.options.push(action.payload);
     },
 
