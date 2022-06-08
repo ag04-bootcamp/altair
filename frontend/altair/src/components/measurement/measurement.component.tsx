@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { add } from "redux/measurements.ts";
 import "./measurement.styles.scss";
 
-
 const Measurement = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const Measurement = () => {
   let options = useSelector((state: any) => state.measurement.options);
   console.log(options);
 
-  const addHandler = (event) => {
+  const addHandler = async (event) => {
     event.preventDefault();
     dispatch(add(measurementInputRef?.current.value));
     navigate("/health-record");
@@ -24,7 +23,7 @@ const Measurement = () => {
       name: measurementInputRef?.current.value,
     };
 
-    axios.post("http://localhost:8080/measurement", addMeasurement);
+    await axios.post("http://localhost:8080/measurement", addMeasurement);
   };
 
   const cancelHandler = () => {

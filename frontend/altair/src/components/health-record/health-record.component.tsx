@@ -33,19 +33,26 @@ const HealthRecord = () => {
         console.log(response.data);
 
         if (response.statusText === "OK") {
-          dispatch(add(response.data));
+          response.data.map((res) => {
+            return dispatch(add(res.name));
+          });
         }
+        console.log(options1);
       };
-      console.log(options1);
 
       fetchData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [options1]);
 
-  const selectoptions = options1.map((option) => {
-    return { value: option.name, label: option.name };
-  });
+  let selectOptions = [];
+
+  if (options1.length > 0) {
+    selectOptions = options1.map((option) => {
+      console.log(option);
+      return { value: option.name, label: option.name };
+    });
+  }
 
   const onChangeDate = (event) => {
     setBirthDate(event);
@@ -109,7 +116,7 @@ const HealthRecord = () => {
           <Select
             onChange={changeSelectHandler}
             className="measurement-select"
-            options={selectoptions}
+            options={selectOptions}
           />
         </div>
       </div>
