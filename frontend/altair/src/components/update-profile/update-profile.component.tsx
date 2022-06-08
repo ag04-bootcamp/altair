@@ -66,7 +66,7 @@ const UpdateProfile = (props) => {
   };
 
   const cancelHandler = () => {
-    navigate("/");
+    navigate("/profile");
   };
 
   const userNameHandler = (event) => {

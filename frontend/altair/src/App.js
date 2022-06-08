@@ -15,6 +15,7 @@ import Files from "./components/files/files.component.tsx";
 import PreviuosProfiles from "./components/profile/previous-profiles.component.tsx";
 import AboutUs from "./components/about-us/about-us.component.tsx";
 import UpdateProfile from "./components/update-profile/update-profile.component.tsx";
+import ProductList from "./components/products/product-list.component.tsx";
 
 import { useSelector } from "react-redux";
 
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="/health-record" element={<HealthRecord />} />
           )}
           {isLoggedIn && <Route path="/files/*" element={<Files />} />}
+          {isLoggedIn && <Route path="/diets" element={<ProductList />} />}
           <Route path="/about-us" element={<AboutUs />} />
           {isLoggedIn && (
             <Route path="/all-records" element={<PreviousRecords />} />
